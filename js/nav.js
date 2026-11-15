@@ -54,8 +54,7 @@
 
   let saved = null;
   try { saved = localStorage.getItem('theme'); } catch (_) { /* storage unavailable */ }
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  applyTheme(saved || (prefersDark ? 'dark' : 'light'));
+  applyTheme(saved || 'light');
 
   if (themeBtn) {
     themeBtn.addEventListener('click', () => {
