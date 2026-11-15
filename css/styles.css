@@ -575,6 +575,11 @@ a { color: var(--accent-text); }
   margin-bottom: var(--space-4);
 }
 .section { margin-top: var(--space-5); }
+/* Activity page: kept invisible (but laid out) until data is filled in,
+   then revealed in one go, so text arriving doesn't push the map and
+   stats around (A1: prevent layout shift). Found via Lighthouse CLS. */
+.is-loading { visibility: hidden; }
+
 /* Map + privacy badge */
 .activity-map-wrap { position: relative; margin-bottom: var(--space-4); }
 .activity-map-wrap .activity-map { margin-bottom: 0; }

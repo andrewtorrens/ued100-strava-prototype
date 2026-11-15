@@ -7,6 +7,8 @@
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'">
   <title>Activity — Strava redesign prototype</title>
+  <meta name="description" content="UED100 Assessment 2: redesigned Strava activity page with progressive disclosure and visible map privacy controls.">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/styles.css">
   <script src="js/nav.js" defer></script>
   <script src="js/activity.js" type="module"></script>
@@ -52,7 +54,7 @@
 
       <!-- ===== Key metrics first (A1 recommendation 2: progressive disclosure) =====
            activity.js fills elements marked data-field="..." using textContent. -->
-      <article id="activity" aria-labelledby="activity-title">
+      <article id="activity" class="is-loading" aria-labelledby="activity-title" aria-busy="true">
         <header class="activity-header">
           <div class="widget__row">
             <span class="avatar" data-field="avatar" aria-hidden="true"></span>

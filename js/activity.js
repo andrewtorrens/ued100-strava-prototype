@@ -19,8 +19,15 @@ function setField(name, value) {
   });
 }
 
+/** Show the activity once everything is filled in (see .is-loading in CSS). */
+function reveal() {
+  article.classList.remove('is-loading');
+  article.setAttribute('aria-busy', 'false');
+}
+
 function showMessage(text) {
   article.replaceChildren();
+  reveal();
   const p = document.createElement('p');
   p.className = 'notice notice--error';
   p.textContent = text;
@@ -84,6 +91,7 @@ async function init() {
   initPrivacy(a);
   initKudos(a);
   initComments(a);
+  reveal();
 }
 
 /* ---------- Storage helper ----------

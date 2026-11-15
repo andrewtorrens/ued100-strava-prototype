@@ -5,7 +5,7 @@ Front-end prototype of the Strava web feed and activity pages, redesigned to imp
 - **Live site:** https://andrewtorrens.github.io/ued100-strava-prototype/
 - **Repository:** https://github.com/andrewtorrens/ued100-strava-prototype
 - **Figma interactive prototype (wireframe flow):** [open in Figma](https://www.figma.com/proto/fHIHaxP1ypCoPnNtwuPql6/UED100-A2-%E2%80%93-Strava-redesign-wireframes-%E2%80%93-Andrew-Rose?node-id=1-2&p=f&t=qNWwwtVnNzBh3Cel-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A2)
-- **Figma wireframes (canvas):** (https://www.figma.com/design/fHIHaxP1ypCoPnNtwuPql6/UED100-A2-%E2%80%93-Strava-redesign-wireframes-%E2%80%93-Andrew-Rose?node-id=0-1&p=f)
+- **Figma wireframes (canvas):** _add link_
 - **Wireframe exports:** `docs/wireframes/`
 
 ## Running it
@@ -36,8 +36,9 @@ js/activity.js        Detail page data binding + features
 js/contact.js         Form validation + success state
 data/activities.json  12 sample activities (stands in for an API)
 assets/img/route.webp Route map image (compressed WebP, start point blurred)
-assets/icons/         Generic single-colour SVG icons, applied as CSS masks
+assets/icons/         Generic single-colour SVG icons (CSS masks) + favicon
 docs/wireframes/      Figma wireframe exports (PNG)
+docs/testing/         Testing screenshots (Lighthouse, axe, contrast, responsive, browsers)
 ```
 
 ## Scope
@@ -50,20 +51,21 @@ The prototype covers the two pages analysed in Assessment 1 plus a support form.
 
 | A1 finding / spec | Implementation | Evidence |
 |---|---|---|
-| Promotions clutter the feed (conversion vs retention) | Sponsored card in the feed with dismiss ✕ and a frequency cap; sidebar in `<aside>` | TODO |
-| Dense telemetry = abrupt context shift | Progressive disclosure toggle on activity page; social kept on page | TODO |
-| Privacy controls must be easy to find (Global Heatmap risk) | Visible map-privacy control, privacy zone on by default; route image has the start point blurred | TODO |
-| Semantic landmarks | `header` / `nav` / `main` / `article` / `aside`, h1–h3 outline, skip link | TODO: axe/WAVE |
+| Promotions clutter the feed (conversion vs retention) | Sponsored cards in the feed: first after 2 activities, then every 5, max 2; dismiss ✕ removes it, stops further promos that visit and is remembered (`feed.js` constants) | Demo: dismiss a promo, reload |
+| Dense telemetry = abrupt context shift | Key stats first; "Show advanced data" toggle (`aria-expanded`, remembered); kudos and comments stay on the activity page | Demo: activity page |
+| Privacy controls must be easy to find (Global Heatmap risk) | Visibility select + privacy-zone switch directly under the map on your own activities (zone on by default, warning when off, saved per activity); map badge + alt text on others' activities; route image start point blurred | Demo: own activity via "Latest activity" |
+| Semantic landmarks | `header` / `nav` / `main` / `article` / `aside`, h1–h3 outline, skip link | axe: 0 violations; Lighthouse Accessibility 100 |
 | Grid + Flexbox, 3 → 1 columns | Mobile-first Grid, breakpoints 48rem / 75rem | TODO: 375 / 768 / 1440 screenshots |
-| Custom properties, dark mode | Tokens in `:root`, `[data-theme="dark"]` override | TODO |
+| Custom properties, dark mode | Tokens in `:root`, `[data-theme="dark"]` override | axe: 0 violations in dark mode |
 | Orange contrast for outdoor use | Brand `#FC4C02` is 3.40:1 on white (fails AA text) → `#C73D00` (5.13:1) for text, dark text on orange buttons | TODO: checker screenshot |
-| Infinite scroll traps keyboard users | "Load more" button | TODO |
-| Loading / error states | Skeleton cards, error notice with retry; specific message if opened from `file://` | TODO: throttled-network screenshot |
-| Charts need text alternatives | SVG elevation chart + text summary | TODO |
-| Lazy load, compress images, reserve dimensions | `loading="lazy"`, width/height + `aspect-ratio`; map PNG 1.85 MB → WebP 207 KB (−89%) | TODO: Lighthouse CLS |
-| Treat user input as text (XSS) | `textContent` only; activity 3 contains a test `<img onerror>` comment | TODO: screenshot |
-| CSP as backup | CSP `<meta>` on every page, no inline/third-party scripts | |
-| Minimise third-party code (Retire.js point) | Zero dependencies; nothing to scan | |
+| Infinite scroll traps keyboard users | "Load more" button; focus moves to the first new activity | TODO: keyboard walkthrough |
+| Loading / error states | Skeleton cards, error notice with retry; specific message if opened from `file://`; activity revealed once loaded | TODO: throttled-network screenshot |
+| Charts need text alternatives | Inline SVG elevation chart (no library) labelled by a text summary: range, highest point, total climbing | axe: 0 violations |
+| Lazy load, compress images, reserve dimensions | `loading="lazy"`, width/height + `aspect-ratio`; map PNG 1.85 MB → WebP 207 KB (−89%) | Lighthouse: Performance 100, CLS 0 |
+| Treat user input as text (XSS) | `textContent` only; activity 3 has a test `<img onerror>` comment; typed `<script>` posts as text | Demo: activity 3, no script runs |
+| Input validation | Contact form: required fields, email format, 20-character minimum, whitespace-only rejected; errors linked by `aria-describedby`, focus to first error | Demo: submit empty form |
+| CSP as backup | CSP `<meta>` on every page, no inline/third-party scripts | CSP blocked an injected inline test script |
+| Minimise third-party code (Retire.js point) | Zero runtime dependencies; nothing to scan | — |
 
 ## Technical decisions
 
@@ -73,22 +75,28 @@ The prototype covers the two pages analysed in Assessment 1 plus a support form.
 - **Initials avatars** instead of photos: no real people's images in a public repository.
 - **Light theme by default:** considered following the OS `prefers-color-scheme` setting (better for user choice) but chose light to match Strava's brand presentation; users can switch with the toggle and the choice is remembered.
 - **CSP via `<meta>`:** blocks inline scripts, so a saved dark-mode preference applies just after load (brief light flash). Production would set CSP as an HTTP header.
+- **Privacy panel only on your own activities:** first version showed a read-only privacy card on everyone's activities; it repeated what the map badge already said, so it was replaced with the badge plus alt text.
+- **Reveal-on-load for the activity page:** content stays laid out but invisible until data is filled in, then appears in one step, so nothing jumps (Lighthouse CLS 0.28 → 0).
 - **Unminified source:** kept readable for assessment; production would add a build step to minify CSS/JS.
 
 ## Testing log
 
 | Date | Test | Result | Change made |
 |---|---|---|---|
-| 15 Nov 2026 | Image weight | Map screenshot 1.85 MB PNG | Converted to WebP (207 KB) |
-| | Lighthouse (mobile) | | |
-| | axe DevTools | | |
+| 15 Nov 2026 | Image weight | Map screenshot 1.85 MB PNG | Converted to WebP (207 KB, −89%) |
+| 15 Nov 2026 | Design review | Privacy card on other athletes' activities repeated the map badge | Card shown only on own activities; badge + alt text elsewhere |
+| 15 Nov 2026 | Lighthouse (mobile) | Activity page CLS 0.23–0.28 (Performance 86–88) | Activity hidden until data loaded, then revealed → CLS 0, Performance 100 |
+| 15 Nov 2026 | Lighthouse | Console 404 (no favicon); no meta description on activity/contact | Added favicon and descriptions → Best Practices and SEO 100 |
+| 15 Nov 2026 | Lighthouse (after fixes) | 100 / 100 / 100 / 100 on all pages | — |
+| 15 Nov 2026 | axe-core (WCAG 2.2 AA + best practice) | 0 violations: all pages, light/dark, 375/1440, menu/panels/errors open | — |
+| | Contrast checker | | |
 | | Keyboard-only walkthrough | | |
-| | Chrome / Firefox / Safari / Edge | | |
+| | Responsive (375 / 768 / 1440) | | |
+| | Chrome / Edge / Firefox / mobile Safari | | |
 | | User test (n = ) | | |
 
-## Credits
-
+Screenshots: `docs/testing/`
 
 ## AI use
 
-Initial layout scaffold (HTML structure, responsive CSS, nav, data loading, sample data, icons) and reference wireframe layouts were generated with Claude, then reviewed, edited and rebuilt by me in VS Code and Figma. A1-driven features, testing and write-up are my own work. See the AI Statement of Acknowledgement in the submission.
+Claude was used to generate the code (layout scaffold, styles, and the feature implementations specified from my Assessment 1 recommendations), sample data, icons, reference wireframe layouts, and an automated Lighthouse/axe pre-check. I set the requirements and design decisions, reviewed and tested each change, directed revisions, built the Figma wireframes and prototype, and committed the work. Manual testing, user testing and the written rationale are my own. See the AI Statement of Acknowledgement in the submission.
