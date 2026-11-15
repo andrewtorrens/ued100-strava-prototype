@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- CSP: see index.html for notes -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'">
+  <title>Activity — Strava redesign prototype</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/nav.js" defer></script>
+  <script src="js/activity.js" type="module"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="wordmark" href="index.html">STRAVA <small>redesign prototype</small></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+      <nav id="primary-nav" class="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Feed</a></li>
+          <li><a class="is-out-of-scope" href="#" aria-disabled="true" title="Not part of this prototype">Training</a></li>
+          <li><a class="is-out-of-scope" href="#" aria-disabled="true" title="Not part of this prototype">Maps</a></li>
+          <li><a class="is-out-of-scope" href="#" aria-disabled="true" title="Not part of this prototype">Challenges</a></li>
+          <li><a href="contact.html">Support</a></li>
+        </ul>
+      </nav>
+      <button class="theme-toggle" type="button" aria-pressed="false">Dark mode</button>
+    </div>
+  </header>
+
+  <div class="layout layout--two">
+    <main id="main" tabindex="-1">
+      <p id="activity-status" role="status" aria-live="polite" class="visually-hidden"></p>
+
+      <!-- ===== Key metrics first (A1 recommendation 2: progressive disclosure) =====
+           activity.js fills elements marked data-field="..." using textContent. -->
+      <article id="activity" aria-labelledby="activity-title">
+        <header class="activity-header">
+          <p class="activity-card__meta">
+            <span class="activity-card__athlete" data-field="athlete">…</span>
+            <span data-field="type">…</span>
+            <time data-field="date">…</time>
+          </p>
+          <h1 id="activity-title" data-field="title">Loading activity…</h1>
+
+          <dl class="stats stats--large">
+            <div class="stat"><dt>Distance</dt><dd data-field="distance">–</dd></div>
+            <div class="stat"><dt>Moving time</dt><dd data-field="movingTime">–</dd></div>
+            <div class="stat"><dt>Pace / speed</dt><dd data-field="pace">–</dd></div>
+            <div class="stat"><dt>Elevation gain</dt><dd data-field="elevation">–</dd></div>
+          </dl>
+        </header>
+
+        <!-- Route map: width/height set so space is reserved (no layout shift),
+             lazy-loaded (A1 performance spec). alt text set by activity.js. -->
+        <img class="activity-map" data-field="map" src="assets/img/route-placeholder.svg"
+             width="1600" height="900" loading="lazy" alt="">
+
+        <!-- ===== Privacy control (A1: privacy controls must be easy to find) =====
+             TODO: map visibility + privacy zone -->
+        <section class="section card" aria-labelledby="privacy-title">
+          <h2 id="privacy-title">Map privacy</h2>
+          <!-- TODO -->
+        </section>
+
+        <!-- ===== Advanced data (subscriber depth on demand) =====
+             TODO: toggle behaviour -->
+        <section class="section" aria-labelledby="advanced-title">
+          <h2 id="advanced-title">Detailed analysis</h2>
+          <button id="advanced-toggle" class="btn" type="button"
+                  aria-expanded="false" aria-controls="advanced-data">
+            Show advanced data
+          </button>
+
+          <div id="advanced-data" hidden>
+            <dl class="stats section">
+              <div class="stat"><dt>Avg heart rate</dt><dd data-field="avgHr">–</dd></div>
+              <div class="stat"><dt>Avg power</dt><dd data-field="avgPower">–</dd></div>
+              <div class="stat"><dt>Calories</dt><dd data-field="calories">–</dd></div>
+            </dl>
+
+            <!-- TODO: elevation chart + text summary (A1: charts need text alternatives) -->
+            <figure class="section">
+              <div class="chart-placeholder" id="elevation-chart">Elevation chart goes here</div>
+              <figcaption class="hint" id="elevation-summary"></figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- ===== Social stays on the page (A1: avoid the abrupt context shift) =====
+             TODO: kudos + comment form -->
+        <section class="section" aria-labelledby="comments-title">
+          <h2 id="comments-title">Kudos &amp; comments</h2>
+          <p><span data-field="kudos">0</span> kudos</p>
+          <ul id="comment-list" class="feed"></ul>
+        </section>
+      </article>
+    </main>
+
+    <aside class="aside" aria-label="Related">
+      <section class="card">
+        <h2>More from this athlete</h2>
+        <p><a href="index.html">Back to feed</a></p>
+      </section>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <p>UED100 Assessment 2 prototype. Not affiliated with Strava, Inc. Sample data only.</p>
+  </footer>
+</body>
+</html>

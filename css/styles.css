@@ -1,0 +1,463 @@
+/* ==========================================================================
+   UED100 Assessment 2 — Strava redesign prototype
+   styles.css — single stylesheet, organised top to bottom:
+     1. Design tokens (custom properties)  — A1: "custom properties centralise
+        colours and typography ... make dark mode easier to maintain"
+     2. Reset / base
+     3. Layout (mobile-first CSS Grid)     — A1: "collapsing three columns into one"
+     4. Site header + responsive nav
+     5. Components (cards, stats, buttons, skeletons, forms)
+     6. Page-specific
+     7. Utilities
+   Breakpoints (mobile-first, min-width):
+     48rem  (768px)  -> two columns
+     75rem  (1200px) -> three columns
+   ========================================================================== */
+
+/* 1. DESIGN TOKENS ------------------------------------------------------- */
+:root {
+  /* Brand orange. #FC4C02 on white = 3.40:1 -> passes WCAG AA for large
+     text and UI components (3:1) but FAILS for body text (4.5:1).
+     So: --accent for fills/large elements, --accent-text for text links. */
+  --accent: #fc4c02;
+  --accent-text: #c73d00;        /* 5.13:1 on white — AA body text */
+  --on-accent: #242428;          /* dark text on orange = 4.55:1 (white is only 3.40) */
+
+  --bg: #f4f4f6;
+  --surface: #ffffff;
+  --text: #242428;
+  --text-muted: #5c5c66;         /* 6.61:1 on white */
+  --border: #dfdfe4;
+  --focus: #1a5fd0;
+  --danger: #b3261e;
+  --success: #1e7a3c;
+
+  /* Typography — fluid sizes via clamp() so text scales with viewport and
+     still respects user zoom / browser font size (A1: relative units). */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
+  --fs-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --fs-stat: clamp(1.5rem, 1.2rem + 1vw, 1.875rem);
+
+  /* Spacing + shape */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --radius: 8px;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 1px 3px rgb(0 0 0 / 0.08);
+  --max-width: 75rem;
+  --header-h: 3.5rem;
+}
+
+/* Dark theme: only the tokens change, every component follows. */
+[data-theme="dark"] {
+  --accent-text: #ff7a3d;        /* 6.96:1 on --bg */
+  --bg: #16161a;
+  --surface: #222228;
+  --text: #e8e8ec;               /* 14.77:1 */
+  --text-muted: #a0a0aa;         /* 6.96:1 */
+  --border: #35353d;
+  --focus: #7fb0ff;
+  --shadow: none;
+}
+
+/* 2. RESET / BASE -------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+}
+
+img, svg { display: block; max-width: 100%; height: auto; }
+
+h1, h2, h3 { line-height: 1.2; margin: 0 0 var(--space-2); }
+h1 { font-size: var(--fs-xl); }
+h2 { font-size: var(--fs-lg); }
+h3 { font-size: var(--fs-base); }
+p { margin: 0 0 var(--space-3); }
+
+a { color: var(--accent-text); }
+
+/* Visible focus for keyboard users (A1: "visible focus states are needed") */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Respect users who ask for less motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* Skip link — first focusable element on every page */
+.skip-link {
+  position: absolute;
+  left: var(--space-3);
+  top: -3rem;
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: var(--radius);
+  z-index: 100;
+}
+.skip-link:focus { top: var(--space-2); }
+
+/* 3. LAYOUT (mobile-first) ------------------------------------------------
+   Mobile: one column, sidebars stack below the main content.
+   Source order is main-first so screen readers / keyboard reach content
+   before promos; grid-template-areas reorders visually on wider screens. */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "main"
+    "aside"
+    "profile";
+  gap: var(--space-4);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-3);
+}
+.layout > main    { grid-area: main; min-width: 0; }
+.layout > .aside  { grid-area: aside; }
+.layout > .profile{ grid-area: profile; }
+
+/* Pages without a left profile column (activity, contact) */
+.layout--two {
+  grid-template-areas:
+    "main"
+    "aside";
+}
+
+@media (min-width: 48rem) {
+  .layout {
+    grid-template-columns: minmax(0, 2fr) minmax(14rem, 1fr);
+    grid-template-areas:
+      "main aside"
+      "main profile";
+    align-items: start;
+  }
+  .layout--two { grid-template-areas: "main aside"; }
+}
+
+@media (min-width: 75rem) {
+  .layout {
+    grid-template-columns: minmax(14rem, 1fr) minmax(0, 2.2fr) minmax(14rem, 1fr);
+    grid-template-areas: "profile main aside";
+  }
+  .layout--two {
+    grid-template-columns: minmax(0, 2.5fr) minmax(16rem, 1fr);
+    grid-template-areas: "main aside";
+  }
+}
+
+/* Single centred column (contact page) */
+.layout--narrow {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-3);
+}
+
+/* 4. SITE HEADER + RESPONSIVE NAV ---------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  max-width: var(--max-width);
+  min-height: var(--header-h);
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+.wordmark {
+  font-weight: 800;
+  font-size: var(--fs-lg);
+  letter-spacing: 0.02em;
+  color: var(--accent-text);
+  text-decoration: none;
+  margin-right: auto;
+}
+.wordmark { white-space: nowrap; }
+/* "redesign prototype" tag only where there's room */
+.wordmark small { display: none; font-weight: 400; color: var(--text-muted); font-size: var(--fs-sm); }
+@media (min-width: 75rem) { .wordmark small { display: inline; } }
+
+/* Hamburger: shown on mobile only */
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;            /* 44px touch target */
+  height: 2.75rem;
+  padding: 0;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  cursor: pointer;
+}
+.nav-toggle__bars,
+.nav-toggle__bars::before,
+.nav-toggle__bars::after {
+  display: block;
+  width: 1.25rem;
+  height: 2px;
+  background: currentColor;
+  position: relative;
+  transition: transform 0.2s;
+}
+.nav-toggle__bars::before,
+.nav-toggle__bars::after { content: ""; position: absolute; left: 0; }
+.nav-toggle__bars::before { top: -6px; }
+.nav-toggle__bars::after  { top: 6px; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars { background: transparent; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars::before { transform: translateY(6px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars::after  { transform: translateY(-6px) rotate(-45deg); }
+
+/* Mobile: menu is a full-width dropdown under the header, hidden by default.
+   nav.js toggles .is-open and aria-expanded together. */
+.primary-nav {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.primary-nav.is-open { display: block; }
+.primary-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-2) var(--space-3) var(--space-3);
+}
+.primary-nav a {
+  display: block;
+  padding: var(--space-2) 0;
+  color: var(--text);
+  text-decoration: none;
+}
+.primary-nav a[aria-current="page"] {
+  color: var(--accent-text);
+  font-weight: 700;
+}
+/* Out-of-scope Strava sections: visible for realism, clearly disabled */
+.primary-nav .is-out-of-scope { color: var(--text-muted); }
+
+@media (min-width: 48rem) {
+  .nav-toggle { display: none; }
+  .primary-nav {
+    display: block;
+    position: static;
+    border: 0;
+    box-shadow: none;
+    background: none;
+  }
+  .primary-nav ul {
+    display: flex;
+    gap: var(--space-4);
+    padding: 0;
+  }
+  .primary-nav a { padding: var(--space-3) 0; border-bottom: 3px solid transparent; }
+  .primary-nav a[aria-current="page"] { border-bottom-color: var(--accent); }
+}
+
+.theme-toggle {
+  min-height: 2.75rem;
+  padding: 0 var(--space-3);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* 5. COMPONENTS ----------------------------------------------------------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space-3);
+}
+.card + .card { margin-top: var(--space-3); }
+
+.feed { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
+
+/* Activity card */
+.activity-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  margin-bottom: var(--space-2);
+}
+.activity-card__athlete { font-weight: 700; color: var(--text); }
+.activity-card__title a { color: var(--text); text-decoration: none; }
+.activity-card__title a:hover,
+.activity-card__title a:focus-visible { color: var(--accent-text); text-decoration: underline; }
+.activity-card__map {
+  aspect-ratio: 16 / 9;           /* reserves space -> no layout shift (A1) */
+  width: 100%;
+  object-fit: cover;
+  border-radius: calc(var(--radius) - 2px);
+  background: var(--bg);
+  margin: var(--space-3) 0;
+}
+.activity-card__actions {
+  display: flex;
+  gap: var(--space-2);
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-2);
+}
+
+/* Stat row — Flexbox, wraps on narrow screens (A1: Flexbox for metric cards) */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-4);
+  margin: 0;
+}
+.stat { display: flex; flex-direction: column-reverse; }   /* value above label visually, label first in source */
+.stat dt { font-size: var(--fs-sm); color: var(--text-muted); }
+.stat dd { margin: 0; font-size: var(--fs-lg); font-weight: 700; }
+.stats--large .stat dd { font-size: var(--fs-stat); }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 2.75rem;
+  padding: 0 var(--space-3);
+  font: inherit;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+.btn--ghost { border-color: transparent; background: none; }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* Skeleton loading placeholders (A1: "placeholders while data loads") */
+.skeleton {
+  background: linear-gradient(90deg, var(--border) 25%, var(--bg) 50%, var(--border) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+  border-radius: 4px;
+}
+.skeleton--line  { height: 0.9rem; margin-bottom: var(--space-2); }
+.skeleton--short { width: 40%; }
+.skeleton--map   { aspect-ratio: 16 / 9; margin: var(--space-3) 0; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+/* Status / error messages */
+.notice {
+  padding: var(--space-3);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.notice--error { border-color: var(--danger); }
+.notice--success { border-color: var(--success); }
+
+/* Forms */
+.form-field { margin-bottom: var(--space-3); }
+.form-field label { display: block; font-weight: 600; margin-bottom: var(--space-1); }
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-3);
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--text-muted);   /* 3:1+ border contrast for inputs */
+  border-radius: var(--radius);
+}
+.form-field textarea { min-height: 8rem; resize: vertical; }
+.form-field .hint  { font-size: var(--fs-sm); color: var(--text-muted); margin: var(--space-1) 0 0; }
+.form-field .error { font-size: var(--fs-sm); color: var(--danger); margin: var(--space-1) 0 0; }
+.form-field .error:empty { display: none; }
+.form-field [aria-invalid="true"] { border-color: var(--danger); border-width: 2px; }
+[data-theme="dark"] .form-field .error { color: #ff8a80; }
+
+/* Promo slot (aside) */
+.promo { border-left: 4px solid var(--accent); }
+.promo__label {
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+/* 6. PAGE-SPECIFIC -------------------------------------------------------- */
+.activity-header { margin-bottom: var(--space-4); }
+.activity-map {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  object-fit: cover;
+  border-radius: var(--radius);
+  background: var(--bg);
+  margin-bottom: var(--space-4);
+}
+.section { margin-top: var(--space-5); }
+.chart-placeholder {
+  display: grid;
+  place-items: center;
+  min-height: 10rem;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+}
+
+.site-footer {
+  max-width: var(--max-width);
+  margin: var(--space-5) auto 0;
+  padding: var(--space-4) var(--space-3);
+  border-top: 1px solid var(--border);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+/* 7. UTILITIES ------------------------------------------------------------ */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+[hidden] { display: none !important; }

@@ -1,0 +1,1263 @@
+[
+  {
+    "id": 1,
+    "athlete": "Jordan B.",
+    "type": "Ride",
+    "title": "Morning coffee ride",
+    "date": "2026-11-14T06:40:00+11:00",
+    "location": "Wollongong",
+    "distanceKm": 47.67,
+    "movingTimeS": 7600,
+    "elevationGainM": 274,
+    "avgHr": 130,
+    "avgPowerW": 193,
+    "calories": 982,
+    "kudos": 31,
+    "mapImage": "assets/img/route-1.svg",
+    "elevationProfile": [
+      {
+        "km": 0.0,
+        "m": 363
+      },
+      {
+        "km": 2.4,
+        "m": 386
+      },
+      {
+        "km": 4.8,
+        "m": 406
+      },
+      {
+        "km": 7.2,
+        "m": 438
+      },
+      {
+        "km": 9.5,
+        "m": 449
+      },
+      {
+        "km": 11.9,
+        "m": 439
+      },
+      {
+        "km": 14.3,
+        "m": 442
+      },
+      {
+        "km": 16.7,
+        "m": 454
+      },
+      {
+        "km": 19.1,
+        "m": 460
+      },
+      {
+        "km": 21.5,
+        "m": 444
+      },
+      {
+        "km": 23.8,
+        "m": 407
+      },
+      {
+        "km": 26.2,
+        "m": 403
+      },
+      {
+        "km": 28.6,
+        "m": 453
+      },
+      {
+        "km": 31.0,
+        "m": 367
+      },
+      {
+        "km": 33.4,
+        "m": 357
+      },
+      {
+        "km": 35.8,
+        "m": 290
+      },
+      {
+        "km": 38.1,
+        "m": 277
+      },
+      {
+        "km": 40.5,
+        "m": 347
+      },
+      {
+        "km": 42.9,
+        "m": 276
+      },
+      {
+        "km": 45.3,
+        "m": 308
+      },
+      {
+        "km": 47.7,
+        "m": 289
+      }
+    ],
+    "comments": [
+      {
+        "author": "Tom W.",
+        "text": "Great effort!"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "athlete": "Tom W.",
+    "type": "Run",
+    "title": "Saturday run",
+    "date": "2026-11-13T05:05:00+11:00",
+    "location": "Wollongong",
+    "distanceKm": 20.39,
+    "movingTimeS": 5936,
+    "elevationGainM": 192,
+    "avgHr": 154,
+    "avgPowerW": null,
+    "calories": 875,
+    "kudos": 36,
+    "mapImage": "assets/img/route-2.svg",
+    "elevationProfile": [
+      {
+        "km": 0.0,
+        "m": 264
+      },
+      {
+        "km": 1.0,
+        "m": 282
+      },
+      {
+        "km": 2.0,
+        "m": 299
+      },
+      {
+        "km": 3.1,
+        "m": 301
+      },
+      {
+        "km": 4.1,
+        "m": 321
+      },
+      {
+        "km": 5.1,
+        "m": 332
+      },
+      {
+        "km": 6.1,
+        "m": 321
+      },
+      {
+        "km": 7.1,
+        "m": 317
+      },
+      {
+        "km": 8.2,
+        "m": 319
+      },
+      {
+        "km": 9.2,
+        "m": 319
+      },
+      {
+        "km": 10.2,
+        "m": 279
+      },
+      {
+        "km": 11.2,
+        "m": 314
+      },
+      {
+        "km": 12.2,
+        "m": 232
+      },
+      {
+        "km": 13.3,
+        "m": 275
+      },
+      {
+        "km": 14.3,
+        "m": 214
+      },
+      {
+        "km": 15.3,
+        "m": 198
+      },
+      {
+        "km": 16.3,
+        "m": 234
+      },
+      {
+        "km": 17.3,
+        "m": 209
+      },
+      {
+        "km": 18.4,
+        "m": 250
+      },
+      {
+        "km": 19.4,
+        "m": 226
+      },
+      {
+        "km": 20.4,
+        "m": 200
+      }
+    ],
+    "comments": []
+  },
+  {
+    "id": 3,
+    "athlete": "Jordan B.",
+    "type": "Ride",
+    "title": "Hill repeats",
+    "date": "2026-11-12T07:20:00+11:00",
+    "location": "Royal National Park",
+    "distanceKm": 47.3,
+    "movingTimeS": 5752,
+    "elevationGainM": 517,
+    "avgHr": 154,
+    "avgPowerW": 219,
+    "calories": 1044,
+    "kudos": 21,
+    "mapImage": "assets/img/route-3.svg",
+    "elevationProfile": [
+      {
+        "km": 0.0,
+        "m": 390
+      },
+      {
+        "km": 2.4,
+        "m": 430
+      },
+      {
+        "km": 4.7,
+        "m": 463
+      },
+      {
+        "km": 7.1,
+        "m": 494
+      },
+      {
+        "km": 9.5,
+        "m": 531
+      },
+      {
+        "km": 11.8,
+        "m": 555
+      },
+      {
+        "km": 14.2,
+        "m": 560
+      },
+      {
+        "km": 16.6,
+        "m": 546
+      },
+      {
+        "km": 18.9,
+        "m": 564
+      },
+      {
+        "km": 21.3,
+        "m": 457
+      },
+      {
+        "km": 23.7,
+        "m": 512
+      },
+      {
+        "km": 26.0,
+        "m": 493
+      },
+      {
+        "km": 28.4,
+        "m": 448
+      },
+      {
+        "km": 30.7,
+        "m": 520
+      },
+      {
+        "km": 33.1,
+        "m": 282
+      },
+      {
+        "km": 35.5,
+        "m": 263
+      },
+      {
+        "km": 37.8,
+        "m": 418
+      },
+      {
+        "km": 40.2,
+        "m": 313
+      },
+      {
+        "km": 42.6,
+        "m": 264
+      },
+      {
+        "km": 44.9,
+        "m": 279
+      },
+      {
+        "km": 47.3,
+        "m": 349
+      }
+    ],
+    "comments": [
+      {
+        "author": "Test user",
+        "text": "<img src=x onerror=alert('xss')> should render as plain text"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "athlete": "Mia L.",
+    "type": "Walk",
+    "title": "Evening walk",
+    "date": "2026-11-11T14:40:00+11:00",
+    "location": "Wollongong",
+    "distanceKm": 5.94,
+    "movingTimeS": 4513,
+    "elevationGainM": 60,
+    "avgHr": null,
+    "avgPowerW": null,
+    "calories": 773,
+    "kudos": 22,
+    "mapImage": "assets/img/route-4.svg",
+    "elevationProfile": [
+      {
+        "km": 0.0,
+        "m": 155
+      },
+      {
+        "km": 0.3,
+        "m": 169
+      },
+      {
+        "km": 0.6,
+        "m": 166
+      },
+      {
+        "km": 0.9,
+        "m": 168
+      },
+      {
+        "km": 1.2,
+        "m": 175
+      },
+      {
+        "km": 1.5,
+        "m": 173
+      },
+      {
+        "km": 1.8,
+        "m": 168
+      },
+      {
+        "km": 2.1,
+        "m": 174
+      },
+      {
+        "km": 2.4,
+        "m": 175
+      },
+      {
+        "km": 2.7,
+        "m": 164
+      },
+      {
+        "km": 3.0,
+        "m": 182
+      },
+      {
+        "km": 3.3,
+        "m": 172
+      },
+      {
+        "km": 3.6,
+        "m": 143
+      },
+      {
+        "km": 3.9,
+        "m": 165
+      },
+      {
+        "km": 4.2,
+        "m": 171
+      },
+      {
+        "km": 4.5,
+        "m": 153
+      },
+      {
+        "km": 4.8,
+        "m": 171
+      },
+      {
+        "km": 5.1,
+        "m": 135
+      },
+      {
+        "km": 5.3,
+        "m": 129
+      },
+      {
+        "km": 5.6,
+        "m": 157
+      },
+      {
+        "km": 5.9,
+        "m": 155
+      }
+    ],
+    "comments": [
+      {
+        "author": "Tom W.",
+        "text": "Great effort!"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "athlete": "Sam K.",
+    "type": "Run",
+    "title": "Recovery jog",
+    "date": "2026-11-10T10:40:00+11:00",
+    "location": "Parramatta River",
+    "distanceKm": 13.77,
+    "movingTimeS": 4071,
+    "elevationGainM": 203,
+    "avgHr": 158,
+    "avgPowerW": null,
+    "calories": 648,
+    "kudos": 17,
+    "mapImage": "assets/img/route-1.svg",
+    "elevationProfile": [
+      {
+        "km": 0.0,
+        "m": 164
+      },
+      {
+        "km": 0.7,
+        "m": 173
+      },
+      {
+        "km": 1.4,
+        "m": 181
+      },
+      {
+        "km": 2.1,
+        "m": 197
+      },
+      {
+        "km": 2.8,
+        "m": 205
+      },
+      {
+        "km": 3.4,
+        "m": 217
+      },
+      {
+        "km": 4.1,
+        "m": 222
+      },
+      {
+        "km": 4.8,
+        "m": 231
+      },
+      {
+        "km": 5.5,
+        "m": 231
+      },
+      {
+        "km": 6.2,
+        "m": 216
+      },
+      {
+        "km": 6.9,
+        "m": 197
+      },
+      {
+        "km": 7.6,
+        "m": 194
+      },
+      {
+        "km": 8.3,
+        "m": 227
+      },
+      {
+        "km": 9.0,
+        "m": 204
+      },
+      {
+        "km": 9.6,
+        "m": 118
+      },
+      {
+        "km": 10.3,
+        "m": 160
+      },
+      {
+        "km": 11.0,
+        "m": 116
+      },
+      {
+        "km": 11.7,
+        "m": 172
+      },
+      {
+        "km": 12.4,
+        "m": 129
+      },
+      {
+        "km": 13.1,
+        "m": 102
+      },
+      {
+        "km": 13.8,
+        "m": 96
+      }
+    ],
+    "comments": []
+  },
+  {
+    "id": 6,
+    "athlete": "Sam K.",
+    "type": "Ride",
+    "title": "Morning coffee ride",
+    "date": "2026-11-09T09:20:00+11:00",
+    "location": "Centennial Park, Sydney",
+    "distanceKm": 56.66,
+    "movingTimeS": 6907,
+    "elevationGainM": 977,
+    "avgHr": 131,
+    "avgPowerW": 184,
+    "calories": 1240,
+    "kudos": 27,
+    "mapImage": "assets/img/route-2.svg",
+    "elevationProfile": [
+      {
+        "km": 0.0,
+        "m": 483
+      },
+      {
+        "km": 2.8,
+        "m": 537
+      },
+      {
+        "km": 5.7,
+        "m": 616
+      },
+      {
+        "km": 8.5,
+        "m": 669
+      },
+      {
+        "km": 11.3,
+        "m": 727
+      },
+      {
+        "km": 14.2,
+        "m": 749
+      },
+      {
+        "km": 17.0,
+        "m": 808
+      },
+      {
+        "km": 19.8,
+        "m": 792
+      },
+      {
+        "km": 22.7,
+        "m": 797
+      },
+      {
+        "km": 25.5,
+        "m": 766
+      },
+      {
+        "km": 28.3,
+        "m": 805
+      },
+      {
+        "km": 31.2,
+        "m": 775
+      },
+      {
+        "km": 34.0,
+        "m": 722
+      },
+      {
+        "km": 36.8,
+        "m": 214
+      },
+      {
+        "km": 39.7,
+        "m": 480
+      },
+      {
+        "km": 42.5,
+        "m": 650
+      },
+      {
+        "km": 45.3,
+        "m": 405
+      },
+      {
+        "km": 48.2,
+        "m": 154
+      },
+      {
+        "km": 51.0,
+        "m": 177
+      },
+      {
+        "km": 53.8,
+        "m": 335
+      },
+      {
+        "km": 56.7,
+        "m": 390
+      }
+    ],
+    "comments": []
+  },
+  {
+    "id": 7,
+    "athlete": "Mia L.",
+    "type": "Ride",
+    "title": "Easy spin",
+    "date": "2026-11-08T18:20:00+11:00",
+    "location": "Parramatta River",
+    "distanceKm": 84.47,
+    "movingTimeS": 12044,
+    "elevationGainM": 965,
+    "avgHr": 139,
+    "avgPowerW": 238,
+    "calories": 1621,
+    "kudos": 14,
+    "mapImage": "assets/img/route-3.svg",
+    "elevationProfile": [
+      {
+        "km": 0.0,
+        "m": 501
+      },
+      {
+        "km": 4.2,
+        "m": 591
+      },
+      {
+        "km": 8.4,
+        "m": 622
+      },
+      {
+        "km": 12.7,
+        "m": 737
+      },
+      {
+        "km": 16.9,
+        "m": 716
+      },
+      {
+        "km": 21.1,
+        "m": 753
+      },
+      {
+        "km": 25.3,
+        "m": 821
+      },
+      {
+        "km": 29.6,
+        "m": 834
+      },
+      {
+        "km": 33.8,
+        "m": 824
+      },
+      {
+        "km": 38.0,
+        "m": 772
+      },
+      {
+        "km": 42.2,
+        "m": 820
+      },
+      {
+        "km": 46.5,
+        "m": 816
+      },
+      {
+        "km": 50.7,
+        "m": 704
+      },
+      {
+        "km": 54.9,
+        "m": 364
+      },
+      {
+        "km": 59.1,
+        "m": 453
+      },
+      {
+        "km": 63.4,
+        "m": 490
+      },
+      {
+        "km": 67.6,
+        "m": 500
+      },
+      {
+        "km": 71.8,
+        "m": 188
+      },
+      {
+        "km": 76.0,
+        "m": 437
+      },
+      {
+        "km": 80.2,
+        "m": 345
+      },
+      {
+        "km": 84.5,
+        "m": 334
+      }
+    ],
+    "comments": [
+      {
+        "author": "Tom W.",
+        "text": "Great effort!"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "athlete": "Jordan B.",
+    "type": "Run",
+    "title": "Recovery jog",
+    "date": "2026-11-07T17:20:00+11:00",
+    "location": "Lane Cove",
+    "distanceKm": 18.32,
+    "movingTimeS": 5880,
+    "elevationGainM": 104,
+    "avgHr": 151,
+    "avgPowerW": null,
+    "calories": 759,
+    "kudos": 39,
+    "mapImage": "assets/img/route-4.svg",
+    "elevationProfile": [
+      {
+        "km": 0.0,
+        "m": 122
+      },
+      {
+        "km": 0.9,
+        "m": 129
+      },
+      {
+        "km": 1.8,
+        "m": 134
+      },
+      {
+        "km": 2.7,
+        "m": 141
+      },
+      {
+        "km": 3.7,
+        "m": 155
+      },
+      {
+        "km": 4.6,
+        "m": 147
+      },
+      {
+        "km": 5.5,
+        "m": 148
+      },
+      {
+        "km": 6.4,
+        "m": 149
+      },
+      {
+        "km": 7.3,
+        "m": 162
+      },
+      {
+        "km": 8.2,
+        "m": 146
+      },
+      {
+        "km": 9.2,
+        "m": 122
+      },
+      {
+        "km": 10.1,
+        "m": 148
+      },
+      {
+        "km": 11.0,
+        "m": 148
+      },
+      {
+        "km": 11.9,
+        "m": 108
+      },
+      {
+        "km": 12.8,
+        "m": 90
+      },
+      {
+        "km": 13.7,
+        "m": 83
+      },
+      {
+        "km": 14.7,
+        "m": 93
+      },
+      {
+        "km": 15.6,
+        "m": 111
+      },
+      {
+        "km": 16.5,
+        "m": 130
+      },
+      {
+        "km": 17.4,
+        "m": 91
+      },
+      {
+        "km": 18.3,
+        "m": 113
+      }
+    ],
+    "comments": []
+  },
+  {
+    "id": 9,
+    "athlete": "Priya N.",
+    "type": "Ride",
+    "title": "Morning coffee ride",
+    "date": "2026-11-06T14:05:00+11:00",
+    "location": "Blue Mountains",
+    "distanceKm": 70.03,
+    "movingTimeS": 8652,
+    "elevationGainM": 1089,
+    "avgHr": 136,
+    "avgPowerW": 233,
+    "calories": 1545,
+    "kudos": 19,
+    "mapImage": "assets/img/route-1.svg",
+    "elevationProfile": [
+      {
+        "km": 0.0,
+        "m": 458
+      },
+      {
+        "km": 3.5,
+        "m": 547
+      },
+      {
+        "km": 7.0,
+        "m": 570
+      },
+      {
+        "km": 10.5,
+        "m": 729
+      },
+      {
+        "km": 14.0,
+        "m": 798
+      },
+      {
+        "km": 17.5,
+        "m": 719
+      },
+      {
+        "km": 21.0,
+        "m": 824
+      },
+      {
+        "km": 24.5,
+        "m": 815
+      },
+      {
+        "km": 28.0,
+        "m": 797
+      },
+      {
+        "km": 31.5,
+        "m": 750
+      },
+      {
+        "km": 35.0,
+        "m": 785
+      },
+      {
+        "km": 38.5,
+        "m": 809
+      },
+      {
+        "km": 42.0,
+        "m": 294
+      },
+      {
+        "km": 45.5,
+        "m": 467
+      },
+      {
+        "km": 49.0,
+        "m": 422
+      },
+      {
+        "km": 52.5,
+        "m": 110
+      },
+      {
+        "km": 56.0,
+        "m": 102
+      },
+      {
+        "km": 59.5,
+        "m": 107
+      },
+      {
+        "km": 63.0,
+        "m": 129
+      },
+      {
+        "km": 66.5,
+        "m": 251
+      },
+      {
+        "km": 70.0,
+        "m": 403
+      }
+    ],
+    "comments": []
+  },
+  {
+    "id": 10,
+    "athlete": "Sam K.",
+    "type": "Walk",
+    "title": "Evening walk",
+    "date": "2026-11-05T16:05:00+11:00",
+    "location": "Lane Cove",
+    "distanceKm": 4.41,
+    "movingTimeS": 3453,
+    "elevationGainM": 34,
+    "avgHr": null,
+    "avgPowerW": null,
+    "calories": 486,
+    "kudos": 23,
+    "mapImage": "assets/img/route-2.svg",
+    "elevationProfile": [
+      {
+        "km": 0.0,
+        "m": 281
+      },
+      {
+        "km": 0.2,
+        "m": 283
+      },
+      {
+        "km": 0.4,
+        "m": 291
+      },
+      {
+        "km": 0.7,
+        "m": 295
+      },
+      {
+        "km": 0.9,
+        "m": 284
+      },
+      {
+        "km": 1.1,
+        "m": 296
+      },
+      {
+        "km": 1.3,
+        "m": 291
+      },
+      {
+        "km": 1.5,
+        "m": 287
+      },
+      {
+        "km": 1.8,
+        "m": 283
+      },
+      {
+        "km": 2.0,
+        "m": 284
+      },
+      {
+        "km": 2.2,
+        "m": 296
+      },
+      {
+        "km": 2.4,
+        "m": 296
+      },
+      {
+        "km": 2.6,
+        "m": 290
+      },
+      {
+        "km": 2.9,
+        "m": 273
+      },
+      {
+        "km": 3.1,
+        "m": 271
+      },
+      {
+        "km": 3.3,
+        "m": 280
+      },
+      {
+        "km": 3.5,
+        "m": 274
+      },
+      {
+        "km": 3.8,
+        "m": 271
+      },
+      {
+        "km": 4.0,
+        "m": 271
+      },
+      {
+        "km": 4.2,
+        "m": 265
+      },
+      {
+        "km": 4.4,
+        "m": 278
+      }
+    ],
+    "comments": [
+      {
+        "author": "Tom W.",
+        "text": "Great effort!"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "athlete": "Tom W.",
+    "type": "Run",
+    "title": "Recovery jog",
+    "date": "2026-11-04T11:05:00+11:00",
+    "location": "Parramatta River",
+    "distanceKm": 11.24,
+    "movingTimeS": 3167,
+    "elevationGainM": 181,
+    "avgHr": 132,
+    "avgPowerW": null,
+    "calories": 433,
+    "kudos": 11,
+    "mapImage": "assets/img/route-3.svg",
+    "elevationProfile": [
+      {
+        "km": 0.0,
+        "m": 228
+      },
+      {
+        "km": 0.6,
+        "m": 242
+      },
+      {
+        "km": 1.1,
+        "m": 242
+      },
+      {
+        "km": 1.7,
+        "m": 257
+      },
+      {
+        "km": 2.2,
+        "m": 276
+      },
+      {
+        "km": 2.8,
+        "m": 288
+      },
+      {
+        "km": 3.4,
+        "m": 290
+      },
+      {
+        "km": 3.9,
+        "m": 275
+      },
+      {
+        "km": 4.5,
+        "m": 266
+      },
+      {
+        "km": 5.1,
+        "m": 261
+      },
+      {
+        "km": 5.6,
+        "m": 248
+      },
+      {
+        "km": 6.2,
+        "m": 264
+      },
+      {
+        "km": 6.7,
+        "m": 188
+      },
+      {
+        "km": 7.3,
+        "m": 228
+      },
+      {
+        "km": 7.9,
+        "m": 244
+      },
+      {
+        "km": 8.4,
+        "m": 159
+      },
+      {
+        "km": 9.0,
+        "m": 168
+      },
+      {
+        "km": 9.6,
+        "m": 170
+      },
+      {
+        "km": 10.1,
+        "m": 208
+      },
+      {
+        "km": 10.7,
+        "m": 202
+      },
+      {
+        "km": 11.2,
+        "m": 158
+      }
+    ],
+    "comments": []
+  },
+  {
+    "id": 12,
+    "athlete": "Sam K.",
+    "type": "Ride",
+    "title": "Morning coffee ride",
+    "date": "2026-11-03T17:05:00+11:00",
+    "location": "Royal National Park",
+    "distanceKm": 48.94,
+    "movingTimeS": 7320,
+    "elevationGainM": 721,
+    "avgHr": 156,
+    "avgPowerW": 154,
+    "calories": 1247,
+    "kudos": 19,
+    "mapImage": "assets/img/route-4.svg",
+    "elevationProfile": [
+      {
+        "km": 0.0,
+        "m": 475
+      },
+      {
+        "km": 2.4,
+        "m": 513
+      },
+      {
+        "km": 4.9,
+        "m": 597
+      },
+      {
+        "km": 7.3,
+        "m": 631
+      },
+      {
+        "km": 9.8,
+        "m": 681
+      },
+      {
+        "km": 12.2,
+        "m": 713
+      },
+      {
+        "km": 14.7,
+        "m": 683
+      },
+      {
+        "km": 17.1,
+        "m": 713
+      },
+      {
+        "km": 19.6,
+        "m": 702
+      },
+      {
+        "km": 22.0,
+        "m": 609
+      },
+      {
+        "km": 24.5,
+        "m": 705
+      },
+      {
+        "km": 26.9,
+        "m": 498
+      },
+      {
+        "km": 29.4,
+        "m": 341
+      },
+      {
+        "km": 31.8,
+        "m": 673
+      },
+      {
+        "km": 34.3,
+        "m": 257
+      },
+      {
+        "km": 36.7,
+        "m": 395
+      },
+      {
+        "km": 39.1,
+        "m": 232
+      },
+      {
+        "km": 41.6,
+        "m": 494
+      },
+      {
+        "km": 44.0,
+        "m": 478
+      },
+      {
+        "km": 46.5,
+        "m": 252
+      },
+      {
+        "km": 48.9,
+        "m": 386
+      }
+    ],
+    "comments": []
+  }
+]

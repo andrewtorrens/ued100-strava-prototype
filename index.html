@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Content Security Policy (A1 recommendation: CSP as a backup XSS defence).
+       Only scripts/styles/images from this origin may load: no inline scripts,
+       no third-party scripts. Note: a <meta> CSP can't set frame-ancestors;
+       in production this would be an HTTP response header. -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'">
+  <title>Activity feed — Strava redesign prototype</title>
+  <meta name="description" content="UED100 Assessment 2: redesigned Strava web feed prototype.">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/nav.js" defer></script>
+  <script src="js/feed.js" type="module"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ===== Site header + primary navigation (same on every page) ===== -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="wordmark" href="index.html">STRAVA <small>redesign prototype</small></a>
+
+      <button class="nav-toggle" type="button"
+              aria-expanded="false" aria-controls="primary-nav">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+
+      <nav id="primary-nav" class="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html" aria-current="page">Feed</a></li>
+          <!-- Out of prototype scope: shown for realism, see README "Scope" -->
+          <li><a class="is-out-of-scope" href="#" aria-disabled="true" title="Not part of this prototype">Training</a></li>
+          <li><a class="is-out-of-scope" href="#" aria-disabled="true" title="Not part of this prototype">Maps</a></li>
+          <li><a class="is-out-of-scope" href="#" aria-disabled="true" title="Not part of this prototype">Challenges</a></li>
+          <li><a href="contact.html">Support</a></li>
+        </ul>
+      </nav>
+
+      <button class="theme-toggle" type="button" aria-pressed="false">Dark mode</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- ===== Main feed ===== -->
+    <main id="main" tabindex="-1">
+      <h1 class="visually-hidden">Activity feed</h1>
+
+      <!-- Live region: announces "Loaded N activities" / errors to screen readers -->
+      <p id="feed-status" class="visually-hidden" role="status" aria-live="polite"></p>
+
+      <!-- feed.js replaces the skeletons with <article> activity cards -->
+      <ul id="feed" class="feed" aria-busy="true">
+        <li class="card" aria-hidden="true">
+          <div class="skeleton skeleton--line skeleton--short"></div>
+          <div class="skeleton skeleton--line"></div>
+          <div class="skeleton skeleton--map"></div>
+        </li>
+        <li class="card" aria-hidden="true">
+          <div class="skeleton skeleton--line skeleton--short"></div>
+          <div class="skeleton skeleton--line"></div>
+          <div class="skeleton skeleton--map"></div>
+        </li>
+      </ul>
+
+      <!-- A1: "Load more" instead of infinite scroll so keyboard users can
+           reach the footer. TODO -->
+      <p class="section">
+        <button id="load-more" class="btn" type="button" hidden>Load more activities</button>
+      </p>
+    </main>
+
+    <!-- ===== Right column: promotions / challenges =====
+         <aside> so assistive tech can identify and skip promotional content (A1). -->
+    <aside class="aside" aria-label="Promotions and challenges">
+      <!-- TODO: capped, dismissible promos (A1 recommendation 1) -->
+      <section class="card promo" aria-labelledby="promo-1-title">
+        <p class="promo__label">Sponsored challenge</p>
+        <h2 id="promo-1-title">Summer 100 km Challenge</h2>
+        <p>Ride 100 km before the end of the month and earn a digital badge.</p>
+        <a class="btn btn--primary" href="#">Join challenge</a>
+      </section>
+    </aside>
+
+    <!-- ===== Left column (desktop) / bottom (mobile): athlete summary ===== -->
+    <section class="profile card" aria-labelledby="profile-title">
+      <h2 id="profile-title">Andy R.</h2>
+      <dl class="stats">
+        <div class="stat"><dt>Activities</dt><dd>214</dd></div>
+        <div class="stat"><dt>This week</dt><dd>86 km</dd></div>
+      </dl>
+    </section>
+  </div>
+
+  <footer class="site-footer">
+    <p>UED100 Assessment 2 prototype. Not affiliated with Strava, Inc. Sample data only.</p>
+  </footer>
+</body>
+</html>

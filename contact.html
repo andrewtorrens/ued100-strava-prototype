@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- CSP: see index.html for notes -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'">
+  <title>Contact support — Strava redesign prototype</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/nav.js" defer></script>
+  <script src="js/contact.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="wordmark" href="index.html">STRAVA <small>redesign prototype</small></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+      <nav id="primary-nav" class="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Feed</a></li>
+          <li><a class="is-out-of-scope" href="#" aria-disabled="true" title="Not part of this prototype">Training</a></li>
+          <li><a class="is-out-of-scope" href="#" aria-disabled="true" title="Not part of this prototype">Maps</a></li>
+          <li><a class="is-out-of-scope" href="#" aria-disabled="true" title="Not part of this prototype">Challenges</a></li>
+          <li><a href="contact.html" aria-current="page">Support</a></li>
+        </ul>
+      </nav>
+      <button class="theme-toggle" type="button" aria-pressed="false">Dark mode</button>
+    </div>
+  </header>
+
+  <main id="main" class="layout--narrow" tabindex="-1">
+    <h1>Contact support</h1>
+    <p>Questions about your account, privacy settings or a subscription? Send us a message.</p>
+
+    <!-- novalidate: JS handles validation so messages are consistent and
+         announced to screen readers; native attributes (required, type, maxlength)
+         stay as the baseline if JS fails. -->
+    <form id="contact-form" class="card" novalidate>
+      <div class="form-field">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" autocomplete="name"
+               required maxlength="80" aria-describedby="name-error">
+        <p class="error" id="name-error" aria-live="polite"></p>
+      </div>
+
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email"
+               required maxlength="120" aria-describedby="email-error">
+        <p class="error" id="email-error" aria-live="polite"></p>
+      </div>
+
+      <div class="form-field">
+        <label for="topic">Topic</label>
+        <select id="topic" name="topic" required aria-describedby="topic-error">
+          <option value="">Choose a topic</option>
+          <option value="privacy">Privacy &amp; map visibility</option>
+          <option value="account">Account &amp; login</option>
+          <option value="subscription">Subscription &amp; billing</option>
+          <option value="bug">Report a problem</option>
+        </select>
+        <p class="error" id="topic-error" aria-live="polite"></p>
+      </div>
+
+      <div class="form-field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required minlength="20" maxlength="1000"
+                  aria-describedby="message-hint message-error"></textarea>
+        <p class="hint" id="message-hint">At least 20 characters.</p>
+        <p class="error" id="message-error" aria-live="polite"></p>
+      </div>
+
+      <button class="btn btn--primary" type="submit">Send message</button>
+    </form>
+
+    <!-- Shown by contact.js after a valid submit (nothing is actually sent) -->
+    <div id="contact-success" class="notice notice--success section" role="status" hidden></div>
+  </main>
+
+  <footer class="site-footer">
+    <p>UED100 Assessment 2 prototype. Not affiliated with Strava, Inc. Sample data only.</p>
+  </footer>
+</body>
+</html>
