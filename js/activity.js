@@ -194,8 +194,9 @@ function initElevationChart(activity) {
 
 /* ---------- Map privacy (A1: Global Heatmap / privacy risk) ----------
    Controls sit directly under the map so they're easy to find. Privacy zone
-   is ON by default. Settings are saved per activity. Only the owner can
-   change them; other athletes' activities show a read-only summary. */
+   is ON by default. Settings are saved per activity. Only the owner sees the
+   controls; on other athletes' activities the map badge alone shows the
+   state (and the map's alt text says it for screen reader users). */
 const VISIBILITY_TEXT = {
   everyone: 'Everyone can see this map',
   followers: 'Only your followers can see this map',
@@ -218,19 +219,19 @@ function initPrivacy(activity) {
     badge.textContent = settings.zone ? 'Start/end hidden' : 'Start/end visible';
     badge.classList.toggle('map-badge--warn', !settings.zone);
 
-    if (!isMine) {
-      summary.textContent = settings.zone
-        ? `${activity.athlete} has hidden the start and end of this route.`
-        : `${activity.athlete} shows the full route.`;
-      return;
-    }
+    if (!isMine) return;
     summary.textContent = `${VISIBILITY_TEXT[settings.visibility]}. `
       + (settings.zone
         ? 'Start and end points are hidden.'
         : 'Warning: your start and end points are visible and may reveal where you live.');
   }
 
-  if (isMine) {
+  if (!isMine) {
+    // No controls to show: drop the panel, keep the badge, describe it in alt text
+    summary.closest('section').hidden = true;
+    const map = document.querySelector('[data-field="map"]');
+    map.alt += settings.zone ? '. Start and end points hidden by privacy zone.' : '.';
+  } else {
     controls.hidden = false;
     visibility.value = settings.visibility;
     zone.checked = settings.zone;
