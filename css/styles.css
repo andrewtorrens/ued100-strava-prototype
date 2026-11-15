@@ -425,6 +425,8 @@ a { color: var(--accent-text); }
   text-decoration: none;
 }
 .icon-btn--bare { border-color: transparent; background: none; }
+/* Kudos given: orange icon + border (state also exposed via aria-pressed) */
+.kudos-btn[aria-pressed="true"] { color: var(--accent-text); border-color: var(--accent-text); }
 
 /* Buttons */
 .btn {

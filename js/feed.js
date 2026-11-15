@@ -1,20 +1,61 @@
 /* ==========================================================================
    feed.js — feed page (index.html)
-   Fetch, loading/error states, safe card rendering, paging, in-feed promo.
+   Fetch, loading/error states, safe card rendering, paging ("Load more"),
+   kudos, and capped + dismissible in-feed promotions (A1 recommendation 1).
    ========================================================================== */
 import {
   fetchActivities, formatDuration, formatPace, formatWhen, el, icon, avatar,
 } from './utils.js';
 
 const PAGE_SIZE = 5;
-const PROMO_AFTER = 2; // in-feed sponsored card appears after this many activities
+const ME = 'Andy R.'; // the signed-in athlete (sample data)
+
+/* Promotion cap (A1 recommendation 1: capped, not removed — a compromise
+   between Strava's conversion goal and free-user retention):
+   - first promo after PROMO_FIRST activities, then one every PROMO_INTERVAL
+   - never more than MAX_PROMOS in the feed
+   - once the user dismisses one, no more are inserted this visit
+   - dismissed promos stay hidden on later visits (localStorage) */
+const PROMO_FIRST = 2;
+const PROMO_INTERVAL = 5;
+const MAX_PROMOS = 2;
+const DISMISSED_KEY = 'dismissedPromos';
+
+const PROMOS = [
+  {
+    id: 'nov-200',
+    title: 'Ride 200 km in November',
+    text: 'Complete 200 km this month to unlock a partner discount and a digital badge.',
+    cta: 'Join challenge',
+  },
+  {
+    id: 'trail-series',
+    title: 'Trail Running Series',
+    text: 'Log three trail runs this month and go into the draw for new trail shoes.',
+    cta: 'Join challenge',
+  },
+];
 
 const feedEl = document.getElementById('feed');
 const statusEl = document.getElementById('feed-status');
 const loadMoreBtn = document.getElementById('load-more');
 
 let activities = [];
-let shown = 0; // how many cards are currently rendered
+let shown = 0;          // how many activity cards are rendered
+const promosUsed = new Set(); // ids of promos already placed in the feed
+let promosReduced = false; // set after the user dismisses a promo
+
+/** localStorage can be blocked (private mode, strict settings): fail quietly. */
+function readDismissed() {
+  try { return JSON.parse(localStorage.getItem(DISMISSED_KEY)) || []; } catch (_) { return []; }
+}
+function saveDismissed(id) {
+  try {
+    const ids = new Set(readDismissed());
+    ids.add(id);
+    localStorage.setItem(DISMISSED_KEY, JSON.stringify([...ids]));
+  } catch (_) { /* ignore */ }
+}
 
 /** Small helper: <div class="stat"><dt>label</dt><dd>value</dd></div> */
 function stat(label, value) {
@@ -89,19 +130,17 @@ function renderCard(a) {
   const actions = el('div', 'activity-card__actions activity-card__full');
 
   const summary = el('div', 'kudos-summary');
-  if (a.kudos > 0) {
-    const stack = el('span', 'avatar-stack');
-    a.kudosBy.forEach((name) => stack.append(avatar(name, 'sm')));
-    summary.append(stack);
-  }
-  const count = el('span', 'kudos-count', a.kudos === 1 ? '1 kudo' : `${a.kudos} kudos`);
-  summary.append(count);
+  const stack = el('span', 'avatar-stack');
+  a.kudosBy.forEach((name) => stack.append(avatar(name, 'sm')));
+  const count = el('span', 'kudos-count', kudosText(a.kudos));
+  count.dataset.base = a.kudos; // original count, so toggling can't drift
+  summary.append(stack, count);
 
   const buttons = el('div', 'activity-card__buttons');
   const kudosBtn = el('button', 'icon-btn kudos-btn');
   kudosBtn.type = 'button';
   kudosBtn.setAttribute('aria-pressed', 'false');
-  kudosBtn.setAttribute('aria-label', 'Give kudos');
+  kudosBtn.setAttribute('aria-label', `Give kudos to ${a.athlete}`);
   kudosBtn.dataset.activityId = a.id;
   kudosBtn.append(icon('kudos'));
 
@@ -118,48 +157,130 @@ function renderCard(a) {
   return li;
 }
 
-/** In-feed sponsored challenge: the clutter A1 identified.
-    Rendered between activities, as on Strava's free tier. */
-function renderPromo() {
+function kudosText(n) {
+  return n === 1 ? '1 kudo' : `${n} kudos`;
+}
+
+/** In-feed sponsored challenge: the clutter A1 identified, now dismissible. */
+function renderPromo(promo) {
   const li = el('li');
+  li.className = 'promo-item';
   const section = el('section', 'card promo');
-  section.setAttribute('aria-labelledby', 'feed-promo-title');
+  const titleId = `promo-${promo.id}-title`;
+  section.setAttribute('aria-labelledby', titleId);
 
   const dismiss = el('button', 'icon-btn icon-btn--bare promo__dismiss');
   dismiss.type = 'button';
-  dismiss.setAttribute('aria-label', 'Dismiss this promotion');
+  dismiss.dataset.promoId = promo.id;
+  dismiss.setAttribute('aria-label', `Dismiss sponsored challenge: ${promo.title}`);
   dismiss.append(icon('close'));
 
-  const title = el('h2', '', 'Ride 200 km in November');
-  title.id = 'feed-promo-title';
-  const cta = el('a', 'btn btn--primary btn--sm', 'Join challenge');
+  const title = el('h2', '', promo.title);
+  title.id = titleId;
+  const cta = el('a', 'btn btn--primary btn--sm', promo.cta);
   cta.href = '#';
+  cta.setAttribute('aria-disabled', 'true'); // out of prototype scope
 
   section.append(
     dismiss,
     el('p', 'promo__label', 'Sponsored challenge'),
     title,
-    el('p', '', 'Complete 200 km this month to unlock a partner discount and a digital badge.'),
+    el('p', '', promo.text),
     cta,
   );
   li.append(section);
   return li;
 }
 
-/** Append the next PAGE_SIZE cards. */
+/** Decide whether a promo goes after the activity at this position (1-based).
+    Applies the cap rules listed at the top of the file. */
+function promoAfter(position) {
+  if (promosReduced || promosUsed.size >= MAX_PROMOS) return null;
+  if (position < PROMO_FIRST || (position - PROMO_FIRST) % PROMO_INTERVAL !== 0) return null;
+
+  const dismissed = readDismissed();
+  const promo = PROMOS.find((p) => !promosUsed.has(p.id) && !dismissed.includes(p.id));
+  if (!promo) return null;
+  promosUsed.add(promo.id);
+  return promo;
+}
+
+/** Append the next PAGE_SIZE cards. Returns the first new card's <li>. */
 function renderNextPage() {
-  const next = activities.slice(shown, shown + PAGE_SIZE);
+  const start = shown;
+  const next = activities.slice(start, start + PAGE_SIZE);
   const frag = document.createDocumentFragment();
+  let firstNew = null;
+
   next.forEach((a, i) => {
-    frag.append(renderCard(a));
-    if (shown + i + 1 === PROMO_AFTER) frag.append(renderPromo());
+    const card = renderCard(a);
+    if (!firstNew) firstNew = card;
+    frag.append(card);
+    const promo = promoAfter(start + i + 1);
+    if (promo) frag.append(renderPromo(promo));
   });
+
   feedEl.append(frag);
   shown += next.length;
 
   statusEl.textContent = `Showing ${shown} of ${activities.length} activities`;
   loadMoreBtn.hidden = shown >= activities.length;
+  return firstNew;
 }
+
+/* ---------- Load more (A1: replaces infinite scroll) ----------
+   After loading, focus moves to the first new activity's title so keyboard
+   and screen reader users continue from where the new content starts. */
+loadMoreBtn.addEventListener('click', () => {
+  const firstNew = renderNextPage();
+  firstNew?.querySelector('.activity-card__title a')?.focus();
+});
+
+/* ---------- Kudos ----------
+   Toggle state with aria-pressed; count and avatar stack update to match.
+   Prototype only: not saved. */
+function toggleKudos(btn) {
+  const nowPressed = btn.getAttribute('aria-pressed') !== 'true';
+  btn.setAttribute('aria-pressed', String(nowPressed));
+
+  const card = btn.closest('.activity-card');
+  const count = card.querySelector('.kudos-count');
+  count.textContent = kudosText(Number(count.dataset.base) + (nowPressed ? 1 : 0));
+
+  const stack = card.querySelector('.avatar-stack');
+  if (nowPressed) {
+    const mine = avatar(ME, 'sm');
+    mine.classList.add('is-mine');
+    stack.prepend(mine);
+  } else {
+    stack.querySelector('.is-mine')?.remove();
+  }
+}
+
+/* ---------- Promo dismiss ----------
+   Remove the promo, remember it, stop inserting more this visit, and move
+   focus somewhere sensible so keyboard users aren't dropped to the top. */
+function dismissPromo(btn) {
+  const li = btn.closest('li');
+  const nextFocus = li.nextElementSibling?.querySelector('.activity-card__title a')
+    || (loadMoreBtn.hidden ? null : loadMoreBtn);
+
+  saveDismissed(btn.dataset.promoId);
+  promosReduced = true;
+  li.remove();
+  statusEl.textContent = "Promotion dismissed. You'll see fewer sponsored challenges.";
+  nextFocus?.focus();
+}
+
+// One listener for the whole feed (event delegation), so cards added by
+// "Load more" work without attaching listeners to each one.
+feedEl.addEventListener('click', (e) => {
+  const kudosBtn = e.target.closest('.kudos-btn');
+  if (kudosBtn) { toggleKudos(kudosBtn); return; }
+
+  const dismissBtn = e.target.closest('.promo__dismiss');
+  if (dismissBtn) dismissPromo(dismissBtn);
+});
 
 function showError() {
   feedEl.replaceChildren();
@@ -183,6 +304,7 @@ async function init() {
     activities = await fetchActivities();
     feedEl.replaceChildren(); // remove skeletons
     shown = 0;
+    promosUsed.clear();
     renderNextPage();
   } catch (err) {
     console.error('[feed]', err);
@@ -191,9 +313,5 @@ async function init() {
     feedEl.setAttribute('aria-busy', 'false');
   }
 }
-
-// TODO: load more
-// TODO: kudos
-// TODO: promos — dismiss + cap (A1 recommendation 1)
 
 init();
