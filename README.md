@@ -101,4 +101,8 @@ Screenshots: `docs/testing/`
 
 ## AI use
 
-Claude was used for planning against the brief, generating the code (layout scaffold, styles, and the feature implementations specified from my Assessment 1 recommendations), sample data, icons, reference wireframe layouts, an automated Lighthouse/axe pre-check with fixes, and drafts of this README and the written rationale. I set the requirements and design decisions, reviewed and tested each change, directed revisions, built the Figma wireframes and prototype flow, carried out the manual and user testing, edited the written work, and committed everything. See the AI Statement of Acknowledgement in the submission.
+I used Claude (Anthropic) during this assessment as follows:
+•	Planning: interpreting the brief and rubric, and mapping my Assessment 1 recommendations and feedback to prototype features.
+•	Code: generating the base HTML, CSS and JavaScript scaffold. Assistance in improving and testing the feature implementations (load more, kudos, promotion cap and dismiss, progressive disclosure, privacy controls, elevation chart, comments, form validation) to my specifications. I reviewed and tested each change, directed any revisions and committed the work.
+•	Design: Assistance with wireframe layouts.
+•	Writing: drafting the README and this technical rationale, which I reviewed and edited.
