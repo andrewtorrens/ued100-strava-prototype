@@ -5,7 +5,7 @@
     "type": "Ride",
     "title": "Morning coffee ride",
     "date": "2026-11-14T06:40:00+11:00",
-    "location": "Wollongong",
+    "location": "Adamstown, NSW",
     "distanceKm": 47.67,
     "movingTimeS": 7600,
     "elevationGainM": 274,
@@ -13,7 +13,7 @@
     "avgPowerW": 193,
     "calories": 982,
     "kudos": 31,
-    "mapImage": "assets/img/route-1.svg",
+    "mapImage": "assets/img/route.webp",
     "elevationProfile": [
       {
         "km": 0.0,
@@ -121,7 +121,7 @@
     "type": "Run",
     "title": "Saturday run",
     "date": "2026-11-13T05:05:00+11:00",
-    "location": "Wollongong",
+    "location": "Newcastle, NSW",
     "distanceKm": 20.39,
     "movingTimeS": 5936,
     "elevationGainM": 192,
@@ -129,7 +129,7 @@
     "avgPowerW": null,
     "calories": 875,
     "kudos": 36,
-    "mapImage": "assets/img/route-2.svg",
+    "mapImage": "assets/img/route.webp",
     "elevationProfile": [
       {
         "km": 0.0,
@@ -232,7 +232,7 @@
     "type": "Ride",
     "title": "Hill repeats",
     "date": "2026-11-12T07:20:00+11:00",
-    "location": "Royal National Park",
+    "location": "Newcastle, NSW",
     "distanceKm": 47.3,
     "movingTimeS": 5752,
     "elevationGainM": 517,
@@ -240,7 +240,7 @@
     "avgPowerW": 219,
     "calories": 1044,
     "kudos": 21,
-    "mapImage": "assets/img/route-3.svg",
+    "mapImage": "assets/img/route.webp",
     "elevationProfile": [
       {
         "km": 0.0,
@@ -348,7 +348,7 @@
     "type": "Walk",
     "title": "Evening walk",
     "date": "2026-11-11T14:40:00+11:00",
-    "location": "Wollongong",
+    "location": "Adamstown, NSW",
     "distanceKm": 5.94,
     "movingTimeS": 4513,
     "elevationGainM": 60,
@@ -356,7 +356,7 @@
     "avgPowerW": null,
     "calories": 773,
     "kudos": 22,
-    "mapImage": "assets/img/route-4.svg",
+    "mapImage": "assets/img/route.webp",
     "elevationProfile": [
       {
         "km": 0.0,
@@ -464,7 +464,7 @@
     "type": "Run",
     "title": "Recovery jog",
     "date": "2026-11-10T10:40:00+11:00",
-    "location": "Parramatta River",
+    "location": "Glenrock, NSW",
     "distanceKm": 13.77,
     "movingTimeS": 4071,
     "elevationGainM": 203,
@@ -472,7 +472,7 @@
     "avgPowerW": null,
     "calories": 648,
     "kudos": 17,
-    "mapImage": "assets/img/route-1.svg",
+    "mapImage": "assets/img/route.webp",
     "elevationProfile": [
       {
         "km": 0.0,
@@ -575,7 +575,7 @@
     "type": "Ride",
     "title": "Morning coffee ride",
     "date": "2026-11-09T09:20:00+11:00",
-    "location": "Centennial Park, Sydney",
+    "location": "Newcastle, NSW",
     "distanceKm": 56.66,
     "movingTimeS": 6907,
     "elevationGainM": 977,
@@ -583,7 +583,7 @@
     "avgPowerW": 184,
     "calories": 1240,
     "kudos": 27,
-    "mapImage": "assets/img/route-2.svg",
+    "mapImage": "assets/img/route.webp",
     "elevationProfile": [
       {
         "km": 0.0,
@@ -686,7 +686,7 @@
     "type": "Ride",
     "title": "Easy spin",
     "date": "2026-11-08T18:20:00+11:00",
-    "location": "Parramatta River",
+    "location": "Hamilton, NSW",
     "distanceKm": 84.47,
     "movingTimeS": 12044,
     "elevationGainM": 965,
@@ -694,7 +694,7 @@
     "avgPowerW": 238,
     "calories": 1621,
     "kudos": 14,
-    "mapImage": "assets/img/route-3.svg",
+    "mapImage": "assets/img/route.webp",
     "elevationProfile": [
       {
         "km": 0.0,
@@ -802,7 +802,7 @@
     "type": "Run",
     "title": "Recovery jog",
     "date": "2026-11-07T17:20:00+11:00",
-    "location": "Lane Cove",
+    "location": "Newcastle, NSW",
     "distanceKm": 18.32,
     "movingTimeS": 5880,
     "elevationGainM": 104,
@@ -810,7 +810,7 @@
     "avgPowerW": null,
     "calories": 759,
     "kudos": 39,
-    "mapImage": "assets/img/route-4.svg",
+    "mapImage": "assets/img/route.webp",
     "elevationProfile": [
       {
         "km": 0.0,
@@ -913,7 +913,7 @@
     "type": "Ride",
     "title": "Morning coffee ride",
     "date": "2026-11-06T14:05:00+11:00",
-    "location": "Blue Mountains",
+    "location": "Merewether, NSW",
     "distanceKm": 70.03,
     "movingTimeS": 8652,
     "elevationGainM": 1089,
@@ -921,7 +921,7 @@
     "avgPowerW": 233,
     "calories": 1545,
     "kudos": 19,
-    "mapImage": "assets/img/route-1.svg",
+    "mapImage": "assets/img/route.webp",
     "elevationProfile": [
       {
         "km": 0.0,
@@ -1024,7 +1024,7 @@
     "type": "Walk",
     "title": "Evening walk",
     "date": "2026-11-05T16:05:00+11:00",
-    "location": "Lane Cove",
+    "location": "Newcastle, NSW",
     "distanceKm": 4.41,
     "movingTimeS": 3453,
     "elevationGainM": 34,
@@ -1032,7 +1032,7 @@
     "avgPowerW": null,
     "calories": 486,
     "kudos": 23,
-    "mapImage": "assets/img/route-2.svg",
+    "mapImage": "assets/img/route.webp",
     "elevationProfile": [
       {
         "km": 0.0,
@@ -1140,7 +1140,7 @@
     "type": "Run",
     "title": "Recovery jog",
     "date": "2026-11-04T11:05:00+11:00",
-    "location": "Parramatta River",
+    "location": "Merewether, NSW",
     "distanceKm": 11.24,
     "movingTimeS": 3167,
     "elevationGainM": 181,
@@ -1148,7 +1148,7 @@
     "avgPowerW": null,
     "calories": 433,
     "kudos": 11,
-    "mapImage": "assets/img/route-3.svg",
+    "mapImage": "assets/img/route.webp",
     "elevationProfile": [
       {
         "km": 0.0,
@@ -1251,7 +1251,7 @@
     "type": "Ride",
     "title": "Morning coffee ride",
     "date": "2026-11-03T17:05:00+11:00",
-    "location": "Royal National Park",
+    "location": "Hamilton, NSW",
     "distanceKm": 48.94,
     "movingTimeS": 7320,
     "elevationGainM": 721,
@@ -1259,7 +1259,7 @@
     "avgPowerW": 154,
     "calories": 1247,
     "kudos": 19,
-    "mapImage": "assets/img/route-4.svg",
+    "mapImage": "assets/img/route.webp",
     "elevationProfile": [
       {
         "km": 0.0,

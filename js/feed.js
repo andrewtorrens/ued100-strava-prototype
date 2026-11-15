@@ -80,8 +80,8 @@ function renderCard(a) {
   // Row 3: route map, full width. Lazy-loaded; space reserved via aspect-ratio
   const img = el('img', 'activity-card__map activity-card__full');
   img.src = a.mapImage;
-  img.width = 1600;
-  img.height = 900;
+  img.width = 1686;
+  img.height = 883;
   img.loading = 'lazy';
   img.alt = `Route map for ${a.title}, ${a.distanceKm.toFixed(1)} km ${a.type.toLowerCase()} near ${a.location}`;
 
