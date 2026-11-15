@@ -105,6 +105,14 @@
         "author": "Tom W.",
         "text": "Great effort!"
       }
+    ],
+    "device": "Wahoo ELEMNT Bolt",
+    "description": "",
+    "achievements": 2,
+    "kudosBy": [
+      "Lee C.",
+      "Ana P.",
+      "Priya N."
     ]
   },
   {
@@ -208,7 +216,15 @@
         "m": 200
       }
     ],
-    "comments": []
+    "comments": [],
+    "device": "Garmin Forerunner 265",
+    "description": "",
+    "achievements": 2,
+    "kudosBy": [
+      "Ana P.",
+      "Lee C.",
+      "Priya N."
+    ]
   },
   {
     "id": 3,
@@ -316,6 +332,14 @@
         "author": "Test user",
         "text": "<img src=x onerror=alert('xss')> should render as plain text"
       }
+    ],
+    "device": "Garmin Edge 540",
+    "description": "",
+    "achievements": 1,
+    "kudosBy": [
+      "Priya N.",
+      "Sam K.",
+      "Lee C."
     ]
   },
   {
@@ -424,6 +448,14 @@
         "author": "Tom W.",
         "text": "Great effort!"
       }
+    ],
+    "device": "Strava iPhone app",
+    "description": "",
+    "achievements": 6,
+    "kudosBy": [
+      "Ana P.",
+      "Lee C.",
+      "Priya N."
     ]
   },
   {
@@ -527,7 +559,15 @@
         "m": 96
       }
     ],
-    "comments": []
+    "comments": [],
+    "device": "COROS Pace 3",
+    "description": "Easy aerobic, kept HR down",
+    "achievements": 3,
+    "kudosBy": [
+      "Priya N.",
+      "Ana P.",
+      "Lee C."
+    ]
   },
   {
     "id": 6,
@@ -630,7 +670,15 @@
         "m": 390
       }
     ],
-    "comments": []
+    "comments": [],
+    "device": "Garmin Edge 540",
+    "description": "Coffee stop at the halfway point",
+    "achievements": 3,
+    "kudosBy": [
+      "Priya N.",
+      "Jordan B.",
+      "Mia L."
+    ]
   },
   {
     "id": 7,
@@ -738,6 +786,14 @@
         "author": "Tom W.",
         "text": "Great effort!"
       }
+    ],
+    "device": "Wahoo ELEMNT Bolt",
+    "description": "Coffee stop at the halfway point",
+    "achievements": 3,
+    "kudosBy": [
+      "Priya N.",
+      "Tom W.",
+      "Jordan B."
     ]
   },
   {
@@ -841,7 +897,15 @@
         "m": 113
       }
     ],
-    "comments": []
+    "comments": [],
+    "device": "Garmin Forerunner 265",
+    "description": "",
+    "achievements": 0,
+    "kudosBy": [
+      "Mia L.",
+      "Tom W.",
+      "Ana P."
+    ]
   },
   {
     "id": 9,
@@ -944,7 +1008,15 @@
         "m": 403
       }
     ],
-    "comments": []
+    "comments": [],
+    "device": "Garmin Edge 840",
+    "description": "Endurance | 2h24min @ 136bpm",
+    "achievements": 6,
+    "kudosBy": [
+      "Mia L.",
+      "Ana P.",
+      "Tom W."
+    ]
   },
   {
     "id": 10,
@@ -1052,6 +1124,14 @@
         "author": "Tom W.",
         "text": "Great effort!"
       }
+    ],
+    "device": "Strava iPhone app",
+    "description": "",
+    "achievements": 0,
+    "kudosBy": [
+      "Lee C.",
+      "Priya N.",
+      "Jordan B."
     ]
   },
   {
@@ -1155,7 +1235,15 @@
         "m": 158
       }
     ],
-    "comments": []
+    "comments": [],
+    "device": "Garmin Forerunner 265",
+    "description": "0h52min steady",
+    "achievements": 2,
+    "kudosBy": [
+      "Sam K.",
+      "Ana P.",
+      "Lee C."
+    ]
   },
   {
     "id": 12,
@@ -1258,6 +1346,14 @@
         "m": 386
       }
     ],
-    "comments": []
+    "comments": [],
+    "device": "Garmin Edge 540",
+    "description": "Coffee stop at the halfway point",
+    "achievements": 0,
+    "kudosBy": [
+      "Jordan B.",
+      "Ana P.",
+      "Lee C."
+    ]
   }
 ]

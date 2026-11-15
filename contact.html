@@ -17,20 +17,32 @@
   <header class="site-header">
     <div class="site-header__inner">
       <a class="wordmark" href="index.html">STRAVA <small>redesign prototype</small></a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+
+      <button class="nav-toggle" type="button"
+              aria-expanded="false" aria-controls="primary-nav">
         <span class="nav-toggle__bars" aria-hidden="true"></span>
         <span class="visually-hidden">Menu</span>
       </button>
+
       <nav id="primary-nav" class="primary-nav" aria-label="Primary">
         <ul>
-          <li><a href="index.html">Feed</a></li>
+          <li><a href="index.html">Dashboard</a></li>
+          <!-- Out of prototype scope: shown for realism, see README "Scope" -->
           <li><a class="is-out-of-scope" href="#" aria-disabled="true" title="Not part of this prototype">Training</a></li>
           <li><a class="is-out-of-scope" href="#" aria-disabled="true" title="Not part of this prototype">Maps</a></li>
           <li><a class="is-out-of-scope" href="#" aria-disabled="true" title="Not part of this prototype">Challenges</a></li>
           <li><a href="contact.html" aria-current="page">Support</a></li>
         </ul>
       </nav>
-      <button class="theme-toggle" type="button" aria-pressed="false">Dark mode</button>
+
+      <!-- Header tools. Search, notifications and upload are visual-only
+           (out of scope); theme toggle and avatar are functional/decorative. -->
+      <div class="header-tools">
+        <a class="icon-btn icon-btn--bare is-visual-only" href="#" aria-disabled="true" aria-label="Search (not part of this prototype)"><span class="icon icon--search" aria-hidden="true"></span></a>
+        <a class="icon-btn icon-btn--bare is-visual-only" href="#" aria-disabled="true" aria-label="Notifications (not part of this prototype)"><span class="icon icon--bell" aria-hidden="true"></span></a>
+        <button class="icon-btn icon-btn--bare theme-toggle" type="button" aria-pressed="false" aria-label="Dark mode"><span class="icon icon--moon" aria-hidden="true"></span></button>
+        <a class="icon-btn icon-btn--bare is-visual-only" href="#" aria-disabled="true" aria-label="Upload activity (not part of this prototype)"><span class="icon icon--plus icon--lg icon--accent" aria-hidden="true"></span></a>
+      </div>
     </div>
   </header>
 

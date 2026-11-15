@@ -36,12 +36,6 @@ export function formatPace(activity) {
   return `${(distanceKm / (movingTimeS / 3600)).toFixed(1)} km/h`;
 }
 
-export function formatDate(iso) {
-  return new Date(iso).toLocaleDateString('en-AU', {
-    weekday: 'short', day: 'numeric', month: 'short', year: 'numeric',
-  });
-}
-
 /**
  * Create an element and set its text safely.
  * SECURITY: always textContent, never innerHTML, so user-generated strings
@@ -52,4 +46,33 @@ export function el(tag, className, text) {
   if (className) node.className = className;
   if (text !== undefined) node.textContent = text;
   return node;
+}
+
+/** "Today at 5:49 AM" / "Yesterday at …" / "12 November 2026 at …" (Strava style) */
+export function formatWhen(iso) {
+  const d = new Date(iso);
+  const time = d.toLocaleTimeString('en-AU', { hour: 'numeric', minute: '2-digit' });
+  const startOf = (x) => new Date(x.getFullYear(), x.getMonth(), x.getDate()).getTime();
+  const days = Math.round((startOf(new Date()) - startOf(d)) / 86400000);
+  if (days === 0) return `Today at ${time}`;
+  if (days === 1) return `Yesterday at ${time}`;
+  const date = d.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
+  return `${date} at ${time}`;
+}
+
+/** Decorative icon: <span class="icon icon--ride" aria-hidden="true"> */
+export function icon(name, extra = '') {
+  const span = el('span', `icon icon--${name} ${extra}`.trim());
+  span.setAttribute('aria-hidden', 'true');
+  return span;
+}
+
+/** Initials avatar; colour picked from the name so it's stable per athlete. */
+export function avatar(name, size = '') {
+  const initials = name.split(/\s+/).map((p) => p[0]).join('').slice(0, 2).toUpperCase();
+  let hash = 0;
+  for (const ch of name) hash = (hash + ch.charCodeAt(0)) % 6;
+  const span = el('span', `avatar avatar--c${hash} ${size ? `avatar--${size}` : ''}`.trim(), initials);
+  span.setAttribute('aria-hidden', 'true');   // the name is always shown as text beside it
+  return span;
 }

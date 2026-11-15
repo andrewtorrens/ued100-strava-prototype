@@ -47,8 +47,8 @@
     if (theme === 'dark') root.setAttribute('data-theme', 'dark');
     else root.removeAttribute('data-theme');
     if (themeBtn) {
+      // Label stays "Dark mode"; aria-pressed tells screen readers if it's on
       themeBtn.setAttribute('aria-pressed', String(theme === 'dark'));
-      themeBtn.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
     }
   }
 

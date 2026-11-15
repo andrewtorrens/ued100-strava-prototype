@@ -31,7 +31,7 @@
 
       <nav id="primary-nav" class="primary-nav" aria-label="Primary">
         <ul>
-          <li><a href="index.html" aria-current="page">Feed</a></li>
+          <li><a href="index.html" aria-current="page">Dashboard</a></li>
           <!-- Out of prototype scope: shown for realism, see README "Scope" -->
           <li><a class="is-out-of-scope" href="#" aria-disabled="true" title="Not part of this prototype">Training</a></li>
           <li><a class="is-out-of-scope" href="#" aria-disabled="true" title="Not part of this prototype">Maps</a></li>
@@ -40,7 +40,14 @@
         </ul>
       </nav>
 
-      <button class="theme-toggle" type="button" aria-pressed="false">Dark mode</button>
+      <!-- Header tools. Search, notifications and upload are visual-only
+           (out of scope); theme toggle and avatar are functional/decorative. -->
+      <div class="header-tools">
+        <a class="icon-btn icon-btn--bare is-visual-only" href="#" aria-disabled="true" aria-label="Search (not part of this prototype)"><span class="icon icon--search" aria-hidden="true"></span></a>
+        <a class="icon-btn icon-btn--bare is-visual-only" href="#" aria-disabled="true" aria-label="Notifications (not part of this prototype)"><span class="icon icon--bell" aria-hidden="true"></span></a>
+        <button class="icon-btn icon-btn--bare theme-toggle" type="button" aria-pressed="false" aria-label="Dark mode"><span class="icon icon--moon" aria-hidden="true"></span></button>
+        <a class="icon-btn icon-btn--bare is-visual-only" href="#" aria-disabled="true" aria-label="Upload activity (not part of this prototype)"><span class="icon icon--plus icon--lg icon--accent" aria-hidden="true"></span></a>
+      </div>
     </div>
   </header>
 
@@ -48,6 +55,16 @@
     <!-- ===== Main feed ===== -->
     <main id="main" tabindex="-1">
       <h1 class="visually-hidden">Activity feed</h1>
+
+      <!-- Feed filter: visual only in this prototype -->
+      <div class="feed-filter">
+        <label class="visually-hidden" for="feed-filter">Show activities from</label>
+        <select id="feed-filter" name="feed-filter">
+          <option>Following</option>
+          <option>My activities</option>
+          <option>Clubs</option>
+        </select>
+      </div>
 
       <!-- Live region: announces "Loaded N activities" / errors to screen readers -->
       <p id="feed-status" class="visually-hidden" role="status" aria-live="polite"></p>
@@ -73,25 +90,96 @@
       </p>
     </main>
 
-    <!-- ===== Right column: promotions / challenges =====
-         <aside> so assistive tech can identify and skip promotional content (A1). -->
-    <aside class="aside" aria-label="Promotions and challenges">
+    <!-- ===== Right column: challenges, clubs, suggestions =====
+         <aside> so assistive tech can identify and skip promotional content (A1).
+         Content here is static / visual-only. -->
+    <aside class="aside" aria-label="Challenges, clubs and suggestions">
       <!-- TODO: capped, dismissible promos (A1 recommendation 1) -->
-      <section class="card promo" aria-labelledby="promo-1-title">
-        <p class="promo__label">Sponsored challenge</p>
-        <h2 id="promo-1-title">Summer 100 km Challenge</h2>
-        <p>Ride 100 km before the end of the month and earn a digital badge.</p>
-        <a class="btn btn--primary" href="#">Join challenge</a>
+      <section class="widget" aria-labelledby="challenges-title">
+        <div class="widget__row">
+          <span class="icon icon--shield icon--lg" aria-hidden="true"></span>
+          <div>
+            <h2 id="challenges-title">Challenges</h2>
+            <p class="widget__text">Push yourself further. Join a challenge and see how you measure up against athletes around the world.</p>
+            <a href="#" aria-disabled="true">View all challenges</a>
+          </div>
+        </div>
       </section>
+
+      <section class="widget" aria-labelledby="clubs-title">
+        <h2 id="clubs-title">Your clubs</h2>
+        <div class="club-badges">
+          <span class="club-badge avatar--c4" role="img" aria-label="Harbour Gravel Club">HGC</span>
+          <span class="club-badge avatar--c3" role="img" aria-label="Northside Road Riders">NRR</span>
+          <span class="club-badge avatar--c2" role="img" aria-label="Trail Runners NSW">TRN</span>
+        </div>
+        <a class="btn btn--sm" href="#" aria-disabled="true">View all clubs</a>
+      </section>
+
+      <section class="widget" aria-labelledby="friends-title">
+        <h2 id="friends-title">Suggested friends</h2>
+        <ul class="people">
+          <li class="person">
+            <span class="avatar avatar--c1" aria-hidden="true">RH</span>
+            <div>
+              <p class="person__name">Rae H.</p>
+              <p class="person__meta">Sydney, NSW · Follows you</p>
+              <button class="btn btn--outline btn--sm" type="button">Follow</button>
+            </div>
+          </li>
+          <li class="person">
+            <span class="avatar avatar--c5" aria-hidden="true">DM</span>
+            <div>
+              <p class="person__name">Dev M.</p>
+              <p class="person__meta">Newcastle, NSW · Mutual friends</p>
+              <button class="btn btn--outline btn--sm" type="button">Follow</button>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <ul class="footer-links" aria-label="Site links">
+        <li><a href="#" aria-disabled="true">Community Hub</a></li>
+        <li><a href="contact.html">Support</a></li>
+        <li><a href="#" aria-disabled="true">Subscription</a></li>
+        <li><a href="#" aria-disabled="true">Privacy</a></li>
+      </ul>
     </aside>
 
-    <!-- ===== Left column (desktop) / bottom (mobile): athlete summary ===== -->
-    <section class="profile card" aria-labelledby="profile-title">
-      <h2 id="profile-title">Andy R.</h2>
-      <dl class="stats">
-        <div class="stat"><dt>Activities</dt><dd>214</dd></div>
-        <div class="stat"><dt>This week</dt><dd>86 km</dd></div>
-      </dl>
+    <!-- ===== Left column (desktop) / bottom (mobile): athlete summary =====
+         Static content: shown for realism. -->
+    <section class="profile card profile-card" aria-labelledby="profile-title">
+      <div class="profile-card__top">
+        <span class="avatar avatar--lg avatar--c0" aria-hidden="true">AR</span>
+        <h2 id="profile-title">Andy R.</h2>
+        <dl class="stats">
+          <div class="stat"><dt>Following</dt><dd>70</dd></div>
+          <div class="stat"><dt>Followers</dt><dd>62</dd></div>
+          <div class="stat"><dt>Activities</dt><dd>214</dd></div>
+        </dl>
+      </div>
+
+      <div class="profile-card__section">
+        <p class="profile-card__label">Latest activity</p>
+        <p><a class="profile-card__link" href="activity.html?id=12">Morning coffee ride</a></p>
+      </div>
+
+      <div class="profile-card__section">
+        <p class="profile-card__label">Your streak: 5 weeks</p>
+        <ol class="streak" aria-label="This week">
+          <li>M <span class="streak__dot streak__dot--done" aria-hidden="true">✓</span><span class="visually-hidden">activity</span></li>
+          <li>T <span class="streak__dot streak__dot--done" aria-hidden="true">✓</span><span class="visually-hidden">activity</span></li>
+          <li>W <span class="streak__dot" aria-hidden="true">11</span><span class="visually-hidden">rest</span></li>
+          <li>T <span class="streak__dot streak__dot--done" aria-hidden="true">✓</span><span class="visually-hidden">activity</span></li>
+          <li>F <span class="streak__dot" aria-hidden="true">13</span><span class="visually-hidden">rest</span></li>
+          <li>S <span class="streak__dot streak__dot--done" aria-hidden="true">✓</span><span class="visually-hidden">activity</span></li>
+          <li>S <span class="streak__dot" aria-hidden="true">15</span><span class="visually-hidden">rest</span></li>
+        </ol>
+      </div>
+
+      <div class="profile-card__section">
+        <a class="profile-card__link" href="#" aria-disabled="true">Your training log <span class="icon icon--chevron" aria-hidden="true"></span></a>
+      </div>
     </section>
   </div>
 

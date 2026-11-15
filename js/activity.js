@@ -3,7 +3,7 @@
    Reads ?id, loads data, fills stats via textContent, sets map alt text,
    handles not-found/error states.
    ========================================================================== */
-import { fetchActivities, formatDuration, formatPace, formatDate } from './utils.js';
+import { fetchActivities, formatDuration, formatPace, formatWhen, avatar } from './utils.js';
 
 const statusEl = document.getElementById('activity-status');
 const article = document.getElementById('activity');
@@ -49,8 +49,12 @@ async function init() {
 
   // Key metrics (always visible)
   setField('athlete', a.athlete);
-  setField('type', a.type);
-  setField('date', formatDate(a.date));
+  setField('type', `${a.type}: `);
+  setField('date', formatWhen(a.date));
+  setField('device', a.device);
+  setField('location', a.location);
+  setField('description', a.description);
+  article.querySelector('[data-field="avatar"]').replaceWith(avatar(a.athlete));
   article.querySelector('time[data-field="date"]').dateTime = a.date;
   setField('title', a.title);
   setField('distance', `${a.distanceKm.toFixed(1)} km`);
