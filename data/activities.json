@@ -1247,7 +1247,7 @@
   },
   {
     "id": 12,
-    "athlete": "Sam K.",
+    "athlete": "Andy R.",
     "type": "Ride",
     "title": "Morning coffee ride",
     "date": "2026-11-03T17:05:00+11:00",
@@ -1346,7 +1346,12 @@
         "m": 386
       }
     ],
-    "comments": [],
+    "comments": [
+      {
+        "author": "Priya N.",
+        "text": "Nice loop! Which way did you take through Glenrock?"
+      }
+    ],
     "device": "Garmin Edge 540",
     "description": "Coffee stop at the halfway point",
     "achievements": 0,

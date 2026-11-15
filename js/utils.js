@@ -5,6 +5,9 @@
 
 const DATA_URL = 'data/activities.json';
 
+/** The signed-in athlete (sample data). */
+export const ME = 'Andy R.';
+
 /**
  * Fetch all activities. Mirrors A1's "asynchronous data fetching";
  * in production this would be a paginated API call.

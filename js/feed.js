@@ -4,11 +4,10 @@
    kudos, and capped + dismissible in-feed promotions (A1 recommendation 1).
    ========================================================================== */
 import {
-  fetchActivities, formatDuration, formatPace, formatWhen, el, icon, avatar,
+  fetchActivities, formatDuration, formatPace, formatWhen, el, icon, avatar, ME,
 } from './utils.js';
 
 const PAGE_SIZE = 5;
-const ME = 'Andy R.'; // the signed-in athlete (sample data)
 
 /* Promotion cap (A1 recommendation 1: capped, not removed — a compromise
    between Strava's conversion goal and free-user retention):

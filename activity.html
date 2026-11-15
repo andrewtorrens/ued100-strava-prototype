@@ -76,19 +76,41 @@
         </header>
 
         <!-- Route map: width/height set so space is reserved (no layout shift),
-             lazy-loaded (A1 performance spec). alt text set by activity.js. -->
-        <img class="activity-map" data-field="map" src="assets/img/route.webp"
-             width="1686" height="883" loading="lazy" alt="">
+             lazy-loaded (A1 performance spec). alt text set by activity.js.
+             The badge shows the current privacy state on the map itself. -->
+        <div class="activity-map-wrap">
+          <img class="activity-map" data-field="map" src="assets/img/route.webp"
+               width="1686" height="883" loading="lazy" alt="">
+          <p class="map-badge" id="map-badge" aria-hidden="true"></p>
+        </div>
 
-        <!-- ===== Privacy control (A1: privacy controls must be easy to find) =====
-             TODO: map visibility + privacy zone -->
-        <section class="section card" aria-labelledby="privacy-title">
+        <!-- ===== Privacy control (A1: privacy controls must be easy to find;
+             Global Heatmap risk). Placed directly under the map, not buried in
+             settings. Owner sees controls; other athletes' activities show a
+             read-only summary. ===== -->
+        <section class="section card privacy" aria-labelledby="privacy-title">
           <h2 id="privacy-title">Map privacy</h2>
-          <!-- TODO -->
+          <p id="privacy-summary" class="privacy__summary" role="status" aria-live="polite"></p>
+
+          <div id="privacy-controls" class="privacy__controls" hidden>
+            <div class="form-field">
+              <label for="map-visibility">Who can see this map</label>
+              <select id="map-visibility">
+                <option value="everyone">Everyone</option>
+                <option value="followers">Followers</option>
+                <option value="only-me">Only you</option>
+              </select>
+            </div>
+            <div class="switch">
+              <input type="checkbox" id="privacy-zone" role="switch">
+              <label for="privacy-zone">Hide start and end points (privacy zone)</label>
+            </div>
+          </div>
         </section>
 
         <!-- ===== Advanced data (subscriber depth on demand) =====
-             TODO: toggle behaviour -->
+             Hidden by default for a scannable free-user view; open state is
+             remembered for athletes who always want the detail. -->
         <section class="section" aria-labelledby="advanced-title">
           <h2 id="advanced-title">Detailed analysis</h2>
           <button id="advanced-toggle" class="btn" type="button"
@@ -103,20 +125,38 @@
               <div class="stat"><dt>Calories</dt><dd data-field="calories">–</dd></div>
             </dl>
 
-            <!-- TODO: elevation chart + text summary (A1: charts need text alternatives) -->
-            <figure class="section">
-              <div class="chart-placeholder" id="elevation-chart">Elevation chart goes here</div>
+            <!-- Elevation chart: inline SVG built by activity.js. The figcaption is
+                 the text alternative (A1: charts need text alternatives). -->
+            <figure class="section chart">
+              <h3>Elevation</h3>
+              <div id="elevation-chart"></div>
               <figcaption class="hint" id="elevation-summary"></figcaption>
             </figure>
           </div>
         </section>
 
-        <!-- ===== Social stays on the page (A1: avoid the abrupt context shift) =====
-             TODO: kudos + comment form -->
+        <!-- ===== Social stays on the page (A1: avoid the abrupt context shift) ===== -->
         <section class="section" aria-labelledby="comments-title">
           <h2 id="comments-title">Kudos &amp; comments</h2>
-          <p><span data-field="kudos">0</span> kudos</p>
-          <ul id="comment-list" class="feed"></ul>
+          <div class="activity-card__actions">
+            <p class="kudos-summary"><span id="kudos-count">0 kudos</span></p>
+            <button id="kudos-btn" class="icon-btn kudos-btn" type="button" aria-pressed="false" aria-label="Give kudos">
+              <span class="icon icon--kudos" aria-hidden="true"></span>
+            </button>
+          </div>
+
+          <ul id="comment-list" class="comments"></ul>
+
+          <!-- Comments are rendered with textContent only (A1 XSS spec) -->
+          <form id="comment-form" class="comment-form" novalidate>
+            <div class="form-field">
+              <label for="comment-text" class="visually-hidden">Add a comment</label>
+              <textarea id="comment-text" name="comment" rows="2" maxlength="280"
+                        placeholder="Add a comment…" aria-describedby="comment-error"></textarea>
+              <p class="error" id="comment-error" aria-live="polite"></p>
+            </div>
+            <button class="btn btn--primary" type="submit">Post</button>
+          </form>
         </section>
       </article>
     </main>
