@@ -118,12 +118,21 @@ function renderCard(a) {
   body.append(statsRow);
 
   // Row 3: route map, full width. Lazy-loaded; space reserved via aspect-ratio
-  const img = el('img', 'activity-card__map activity-card__full');
+  const img = el('img', 'activity-card__map');
   img.src = a.mapImage;
   img.width = 1686;
   img.height = 883;
   img.loading = 'lazy';
   img.alt = `Route map for ${a.title}, ${a.distanceKm.toFixed(1)} km ${a.type.toLowerCase()} near ${a.location}`;
+
+  // Map is also a link to the activity (as on Strava) for mouse/touch users.
+  // tabindex -1: keyboard users already have the title link, so this avoids a
+  // second tab stop per card. Added after keyboard testing found the small
+  // title was the only way into an activity.
+  const mapLink = el('a', 'activity-card__map-link activity-card__full');
+  mapLink.href = link.href;
+  mapLink.tabIndex = -1;
+  mapLink.append(img);
 
   // Row 4: kudos summary + kudos / comment buttons
   const actions = el('div', 'activity-card__actions activity-card__full');
@@ -151,7 +160,7 @@ function renderCard(a) {
   buttons.append(kudosBtn, commentLink);
   actions.append(summary, buttons);
 
-  article.append(avatar(a.athlete), who, sport, body, img, actions);
+  article.append(avatar(a.athlete), who, sport, body, mapLink, actions);
   li.append(article);
   return li;
 }
