@@ -102,7 +102,11 @@ Screenshots: `docs/testing/`
 ## AI use
 
 I used Claude (Anthropic) during this assessment as follows:
-•	Planning: interpreting the brief and rubric, and mapping my Assessment 1 recommendations and feedback to prototype features.
-•	Code: generating the base HTML, CSS and JavaScript scaffold. Assistance in improving and testing the feature implementations (load more, kudos, promotion cap and dismiss, progressive disclosure, privacy controls, elevation chart, comments, form validation) to my specifications. I reviewed and tested each change, directed any revisions and committed the work.
-•	Design: Assistance with wireframe layouts.
-•	Writing: drafting the README and this technical rationale, which I reviewed and edited.
+
+- **Planning:** interpreting the brief and rubric, and mapping my Assessment 1 recommendations and feedback to prototype features.
+- **Code:** generating the HTML, CSS and JavaScript scaffold and the feature implementations (load more, kudos, promotion cap and dismiss, progressive disclosure, privacy controls, elevation chart, comments, form validation) to my specifications from Assessment 1. I reviewed and tested each change, directed revisions and committed the work.
+- **Design:** generating reference wireframe layouts, which I imported, edited and linked into a prototype flow in Figma.
+- **Testing:** running an automated Lighthouse and axe pre-check and fixing the issues it found (layout shift, favicon, meta descriptions), which I applied and verified. I carried out the manual testing (contrast, responsive, loading and error states, keyboard, browsers) and the user test.
+- **Writing:** drafting this README and the technical rationale, which I reviewed and edited.
+
+The Assessment 1 analysis, design decisions, Figma work, manual and user testing, and final submission are my own. See the AI Statement of Acknowledgement in the submission.
